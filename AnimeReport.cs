@@ -341,8 +341,8 @@ namespace AnalyzeCode
             }
             
             Logger.Info("Getting total data...");
-            string watchedTagStr = "";
-            string watchedConpanyStr = "";
+            List<string> watchedTagStr = new List<string>();
+            List<string> watchedConpanyStr = new List<string>();
             int tvWatched = 0;
             int tvGaveUp = 0;
             foreach(Anime anime in animeList)
@@ -355,17 +355,17 @@ namespace AnalyzeCode
                 {
                     Logger.Info(anime.name + " watched");
                     ++tvWatched;
-                    string tagStr = "";
+                    List<string> tagStr = new List<string>();
                     if (anime.tags != null && anime.tags.Length > 0)
                     {
                         Logger.Info("getting tag");
                         foreach (MediaTag tag in anime.tags)
                         {
-                            tagStr += " " + tag.Name.Replace(" ", "-");
+                            tagStr.Add(tag.Name);
                         }
                     
-                        watchedTagStr += tagStr;
-                        watchedConpanyStr += anime.productionCompany;
+                        watchedTagStr.AddRange(tagStr);
+                        watchedConpanyStr.Add(anime.productionCompany);
                     }
                 }
                 if (anime.status == Status.GaveUp)
@@ -447,15 +447,16 @@ namespace AnalyzeCode
                 output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|");
                 ++outputedHighScore;
             }
+            output.Add("</details>");
             output.Add("");
             
             Logger.Info("Outputing tags");
             output.Add("Tags: ");
-            output.Add(watchedTagStr);
+            output.AddRange(watchedTagStr);
             output.Add("");
             Logger.Info("Outputing companys");
             output.Add("Companys: ");
-            output.Add(watchedConpanyStr);
+            output.AddRange(watchedConpanyStr);
             
             string outputPath = System.IO.Path.Combine(Output.OutputPath, "AnimeReport.md");
             Logger.Info("Write into: " + outputPath + "...");

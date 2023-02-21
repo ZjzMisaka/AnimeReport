@@ -416,13 +416,10 @@ namespace AnalyzeCode
             output.Add("  |----|----|");
             foreach(Anime anime in animeList)
             {
-                if (anime.planToWatch && anime.tags != null)
+                if (anime.planToWatch)
                 {
-                    foreach (MediaTag tag in anime.tags)
-                    {
-                        Logger.Info("Outputing plan to watch: " + anime.name);
-                        output.Add("  |" + anime.name + "|" + anime.origName + "|");
-                    }
+                    Logger.Info("Outputing plan to watch: " + anime.name);
+                    output.Add("  |" + anime.name + "|" + anime.origName + "|");
                 }
             }
             output.Add("</details>");

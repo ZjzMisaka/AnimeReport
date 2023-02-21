@@ -416,7 +416,7 @@ namespace AnalyzeCode
             output.Add("  |----|----|");
             foreach(Anime anime in animeList)
             {
-                if (anime.planToWatch)
+                if (anime.planToWatch && anime.tags != null)
                 {
                     foreach (MediaTag tag in anime.tags)
                     {

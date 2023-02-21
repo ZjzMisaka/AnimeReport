@@ -1,8 +1,14 @@
 using ClosedXML.Excel;
 using GlobalObjects;
 using System;
+using System.Linq;
+using System.Threading;
+using System.Text.RegularExpressions;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using AniListNet;
+using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AnalyzeCode
 {
@@ -16,6 +22,8 @@ namespace AnalyzeCode
             public string name;
             public string origName;
             public string productionCompany;
+            
+            public MediaTag[] tags;
             
             public Status status;
             public bool planToWatch;
@@ -57,6 +65,11 @@ namespace AnalyzeCode
             return sheet.Cell(row, col).CachedValue.ToString() == "";
         }
         
+        private string DeleteAnnotation(string str)
+        {
+            return Regex.Replace(str, @"[\[][0-9]*[\]]", "");
+        }
+        
         /// <summary>
         /// すべての分析の前に呼び出されます
         /// </summary>
@@ -67,6 +80,7 @@ namespace AnalyzeCode
         public void RunBeforeAnalyzeSheet(Param param, ref Object globalObject, List<string> allFilePathList, bool isExecuteInSequence)
         {
             Output.IsSaveDefaultWorkBook = false;
+            globalObject = new List<string>();
         }
 
         /// <summary>
@@ -220,9 +234,9 @@ namespace AnalyzeCode
                 anime.year = year;
                 anime.animeType = nowAnimeType;
                 anime.season = nowSeason;
-                anime.name = nameCol > 0 ? sheet.Cell(nowRow, nameCol).CachedValue.ToString() : "";
-                anime.origName = origNameCol > 0 ? sheet.Cell(nowRow, origNameCol).CachedValue.ToString() : "";
-                anime.productionCompany = productionCompanyCol > 0 ? sheet.Cell(nowRow, productionCompanyCol).CachedValue.ToString() : "";
+                anime.name = nameCol > 0 ? DeleteAnnotation(sheet.Cell(nowRow, nameCol).CachedValue.ToString()) : "";
+                anime.origName = origNameCol > 0 ? DeleteAnnotation(sheet.Cell(nowRow, origNameCol).CachedValue.ToString()) : "";
+                anime.productionCompany = productionCompanyCol > 0 ? DeleteAnnotation(sheet.Cell(nowRow, productionCompanyCol).CachedValue.ToString()) : "";
                 
                 string statusStr = sheet.Cell(nowRow, 11).CachedValue.ToString();
                 if (statusStr == "未观看")
@@ -240,6 +254,10 @@ namespace AnalyzeCode
                 else if (statusStr == "已弃番")
                 {
                     anime.status = Status.GaveUp;
+                }
+                else
+                {
+                    anime.status = Status.NeverWatched;
                 }
                 string planToWatchStr = sheet.Cell(nowRow, 12).CachedValue.ToString();
                 if (planToWatchStr == "是")
@@ -261,6 +279,9 @@ namespace AnalyzeCode
                     Logger.Info(anime.year + " " + anime.season + ": " + anime.name);
                 }
             }
+            
+            GlobalDic.SetObj(year, animeList);
+            ((List<string>)globalObject).Add(year);
         }
 
         /// <summary>
@@ -273,7 +294,176 @@ namespace AnalyzeCode
         /// <param name="isExecuteInSequence">順番実行するかどうか</param>
         public void RunBeforeSetResult(Param param, XLWorkbook workbook, ref Object globalObject, List<string> allFilePathList, bool isExecuteInSequence)
         {
+            AniClient aniClient = new AniClient();
             
+            List<Anime> animeList = new List<Anime>();
+            foreach(string year in ((List<string>)globalObject))
+            {
+                animeList.AddRange((List<Anime>)GlobalDic.GetObj(year));
+            }
+            
+            foreach(Anime anime in animeList)
+            {
+                Logger.Info("Anime: " + anime.name);
+                if (anime.status != Status.Watched || anime.animeType != AnimeType.TV)
+                {
+                    continue;
+                }
+                Logger.Info("Waiting...");
+                Thread.Sleep(3000);
+                Logger.Info("Getting tags...");
+                var results = aniClient.SearchMediaAsync(new SearchMediaFilter
+                {
+                   Query = anime.origName,
+                   Type = MediaType.Anime,
+                   Sort = MediaSort.Relevance,
+                   Format = new Dictionary<MediaFormat, bool>
+                   {
+                      { MediaFormat.TV, true }, // set to only search for TV shows and movies
+                      { MediaFormat.TVShort, true } // set to not show TV shorts
+                   }
+                }).Result;
+                if (results == null || results.Data == null || results.Data.Length == 0)
+                {
+                    Logger.Info(anime.name + ": Tag not found. ");
+                }
+                else
+                {
+                    Media media = results.Data[0];
+                    anime.tags = aniClient.GetMediaTagsAsync(media.Id).Result;
+                    string tagStr = "";
+                    foreach (MediaTag tag in anime.tags)
+                    {
+                        tagStr += " " + tag.Name.Replace(" ", "-");
+                    }
+                    Logger.Info(anime.name + ":" + tagStr);
+                }
+            }
+            
+            Logger.Info("Getting total data...");
+            string watchedTagStr = "";
+            string watchedConpanyStr = "";
+            int tvWatched = 0;
+            int tvGaveUp = 0;
+            foreach(Anime anime in animeList)
+            {
+                if (anime.animeType != AnimeType.TV)
+                {
+                    continue;
+                }
+                if (anime.status == Status.Watched)
+                {
+                    Logger.Info(anime.name + " watched");
+                    ++tvWatched;
+                    string tagStr = "";
+                    if (anime.tags != null && anime.tags.Length > 0)
+                    {
+                        Logger.Info("getting tag");
+                        foreach (MediaTag tag in anime.tags)
+                        {
+                            tagStr += " " + tag.Name.Replace(" ", "-");
+                        }
+                    
+                        watchedTagStr += tagStr;
+                        watchedConpanyStr += anime.productionCompany;
+                    }
+                }
+                if (anime.status == Status.GaveUp)
+                {
+                    Logger.Info(anime.name + " gave up");
+                    ++tvGaveUp;
+                }
+            }
+            
+            List<string> output = new List<string>();
+            output.Add("# AnimeReport");
+            output.Add("");
+            
+            Logger.Info("Output start");
+            output.Add("观看TV动画" + tvWatched + "部, 弃番" + tvGaveUp +"部, 弃番率" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%");
+            output.Add("");
+            
+            
+            Logger.Info("Outputing year-season list");
+            IEnumerable<IGrouping<string, Anime>> groupedResults = animeList
+                .Where(a => a.animeType == AnimeType.TV && (a.status == Status.Watched || a.status == Status.GaveUp))
+                .GroupBy(k => k.year + "|" + k.season, v => v);
+            foreach(IGrouping<string, Anime> animeGroup in groupedResults)
+            {
+                output.Add("<details>");
+                string year = animeGroup.Key.Split('|')[0];
+                string season = animeGroup.Key.Split('|')[1];
+                Logger.Info("Outputing " + year + ", " + season);
+                int count = animeGroup.Count<Anime>();
+                output.Add("  <summary>Report of " + year + ", " + season + " count: " + count + "</summary>");
+                output.Add("");
+                output.Add("  |中文名|Name|Status|Score|");
+                output.Add("  |----|----|----|----|");
+                foreach(Anime anime in animeGroup)
+                {
+                    output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.status + "|" + (anime.score == -1 ? "-" : anime.score) + "|");
+                    Logger.Info(anime.name);
+                }
+                output.Add("</details>");
+                output.Add("");
+            }
+            
+            Logger.Info("Outputing plan to watch list");
+            output.Add("<details>");
+            output.Add("  <summary>Plan to watch</summary>");
+            output.Add("");
+            output.Add("  |中文名|Name|");
+            output.Add("  |----|----|");
+            foreach(Anime anime in animeList)
+            {
+                if (anime.planToWatch)
+                {
+                    foreach (MediaTag tag in anime.tags)
+                    {
+                        Logger.Info("Outputing plan to watch: " + anime.name);
+                        output.Add("  |" + anime.name + "|" + anime.origName + "|");
+                    }
+                }
+            }
+            output.Add("</details>");
+            output.Add("");
+            
+            Logger.Info("Outputing high score list");
+            List<Anime> sortedAnime = animeList.OrderBy(x => x.score).Reverse().ToList();
+            output.Add("<details>");
+            output.Add("  <summary>High score list (tv)</summary>");
+            output.Add("");
+            output.Add("  |中文名|Name|Score|");
+            output.Add("  |----|----|----|");
+            int outputedHighScore = 0;
+            foreach (Anime anime in sortedAnime)
+            {
+                if (outputedHighScore == 10)
+                {
+                    break;
+                }
+                if (anime.animeType != AnimeType.TV)
+                {
+                    continue;
+                }
+                Logger.Info("Outputing high score list: " + anime.name);
+                output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|");
+                ++outputedHighScore;
+            }
+            output.Add("");
+            
+            Logger.Info("Outputing tags");
+            output.Add("Tags: ");
+            output.Add(watchedTagStr);
+            output.Add("");
+            Logger.Info("Outputing companys");
+            output.Add("Companys: ");
+            output.Add(watchedConpanyStr);
+            
+            string outputPath = System.IO.Path.Combine(Output.OutputPath, "AnimeReport.md");
+            Logger.Info("Write into: " + outputPath + "...");
+            System.IO.File.WriteAllLines(outputPath, output);
+            Logger.Info("OK");
         }
 
         /// <summary>

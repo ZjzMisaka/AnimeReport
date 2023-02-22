@@ -435,6 +435,7 @@ namespace AnalyzeCode
                 ++maxCount;
             }
             int step = maxCount / 10;
+            output.Add("### Annual animation watching statistics map");
             output.Add("````");
             for (int i = 0; i < 10; ++i)
             {

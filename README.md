@@ -6,6 +6,7 @@
 |![](https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.png)|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.png)|
 - Excluded the two tags "Male protagonist" and "Female protagonist"
 
+### Annual animation watching statistics map
 ````
 70┃                                                                                            
 63┃                                                                                        ■■■■

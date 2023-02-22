@@ -307,10 +307,28 @@ namespace AnalyzeCode
             AniClient aniClient = new AniClient();
             List<string> yearList = (List<string>)globalObject;
             List<Anime> animeList = new List<Anime>();
+            
+            Dictionary<string, int> countDic = new Dictionary<string, int>();
+            int maxCount = 0;
             foreach(string year in yearList)
             {
-                animeList.AddRange((List<Anime>)GlobalDic.GetObj(year));
+                List<Anime> thisYearAnimeList = (List<Anime>)GlobalDic.GetObj(year);
+                animeList.AddRange(thisYearAnimeList);
+                int count = 0;
+                foreach(Anime anime in thisYearAnimeList)
+                {
+                    if (anime.status == Status.Watched)
+                    {
+                        ++count;
+                    }
+                }
+                countDic[year] = count;
+                if (count > maxCount)
+                {
+                    maxCount = count;
+                }
             }
+            
             
             foreach(Anime anime in animeList)
             {
@@ -403,6 +421,63 @@ namespace AnalyzeCode
             output.Add("|----|----|");
             output.Add("|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.png)|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.png)|");
             output.Add("- Excluded the two tags \"Male protagonist\" and \"Female protagonist\"");
+            
+            output.Add("");
+            List<string> lines = new List<string>();
+            for (int i = 0; i < 10; ++i)
+            {
+                lines.Add("");
+            }
+            string baseStr = "  ┗";
+            string yearsStr = "   ";
+            while (maxCount % 10 != 0)
+            {
+                ++maxCount;
+            }
+            int step = maxCount / 10;
+            output.Add("````");
+            for (int i = 0; i < 10; ++i)
+            {
+                string now = (maxCount - i * step).ToString() + "┃";
+                if (now.Length == 2)
+                {
+                    now = " " + now;
+                }
+                lines[i] = now;
+            }
+            foreach (string year in yearList)
+            {
+                int count = countDic[year];
+                for (int i = 0; i < 10; ++i)
+                {
+                    int now = (maxCount - i * step);
+                    if (count >= now)
+                    {
+                        lines[i] = lines[i] + "■■■■";
+                    }
+                    else
+                    {
+                        if (i == 9 && count > 0)
+                        {
+                            lines[i] = lines[i] + "₋₋₋₋";
+                        }
+                        else
+                        {
+                            lines[i] = lines[i] + "    ";
+                        }
+                    }
+                }
+                baseStr += "━━━━";
+                yearsStr += " " + year.Substring(2) + " ";
+            }
+            foreach (string line in lines)
+            {
+                output.Add(line);
+            }
+            output.Add(baseStr);
+            output.Add(yearsStr);
+            output.Add("````");
+            output.Add("");
             
             Logger.Info("Outputing year-season list");
             IEnumerable<IGrouping<string, Anime>> groupedResults = animeList

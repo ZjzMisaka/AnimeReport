@@ -70,6 +70,11 @@ namespace AnalyzeCode
             return Regex.Replace(str, @"[\[][0-9]*[\]]", "");
         }
         
+        private string ReplaceChars(string str)
+        {
+            return str.Replace(" ", "spacespace").Replace(".", "tenten").Replace("-", "lineline").Replace("'", "quotesquotes");
+        }
+        
         /// <summary>
         /// すべての分析の前に呼び出されます
         /// </summary>
@@ -295,9 +300,9 @@ namespace AnalyzeCode
         public void RunBeforeSetResult(Param param, XLWorkbook workbook, ref Object globalObject, List<string> allFilePathList, bool isExecuteInSequence)
         {
             AniClient aniClient = new AniClient();
-            
+            List<string> yearList = (List<string>)globalObject;
             List<Anime> animeList = new List<Anime>();
-            foreach(string year in ((List<string>)globalObject))
+            foreach(string year in yearList)
             {
                 animeList.AddRange((List<Anime>)GlobalDic.GetObj(year));
             }
@@ -361,11 +366,15 @@ namespace AnalyzeCode
                         Logger.Info("getting tag");
                         foreach (MediaTag tag in anime.tags)
                         {
-                            tagStr.Add(tag.Name);
+                            if (tag.Name.ToLower() == "female protagonist" || tag.Name.ToLower() == "male protagonist")
+                            {
+                                continue;
+                            }
+                            tagStr.Add(ReplaceChars(tag.Name));
                         }
                     
                         watchedTagStr.AddRange(tagStr);
-                        watchedConpanyStr.Add(anime.productionCompany);
+                        watchedConpanyStr.Add(ReplaceChars(anime.productionCompany));
                     }
                 }
                 if (anime.status == Status.GaveUp)
@@ -380,15 +389,20 @@ namespace AnalyzeCode
             output.Add("");
             
             Logger.Info("Output start");
-            output.Add("观看TV动画" + tvWatched + "部, 弃番" + tvGaveUp +"部, 弃番率" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%");
+            output.Add("### " + "自" + yearList[0] + "年到" + yearList.Last() + "年, 共观看TV动画" + tvWatched + "部, 弃番" + tvGaveUp +"部, 弃番率" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%");
             output.Add("");
             
+            output.Add("|Favourite Tags|Favourite Production Company|");
+            output.Add("|----|----|");
+            output.Add("|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.png)|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.png)|");
+            output.Add("- Excluded the two tags \"Male protagonist\" and \"Female protagonist\"");
             
             Logger.Info("Outputing year-season list");
             IEnumerable<IGrouping<string, Anime>> groupedResults = animeList
                 .Where(a => a.animeType == AnimeType.TV && (a.status == Status.Watched || a.status == Status.GaveUp))
                 .GroupBy(k => k.year + "|" + k.season, v => v);
-            foreach(IGrouping<string, Anime> animeGroup in groupedResults)
+                IEnumerable<IGrouping<string, Anime>> groupedResultsReversed = groupedResults.Reverse();
+            foreach(IGrouping<string, Anime> animeGroup in groupedResultsReversed)
             {
                 output.Add("<details>");
                 string year = animeGroup.Key.Split('|')[0];
@@ -450,13 +464,16 @@ namespace AnalyzeCode
             output.Add("</details>");
             output.Add("");
             
+            output.Add("The tag cloud can be generated from the following contents.");
+            output.Add("Note: \" \" = space, \".\" = tenten, \"-\" = lineline, \"'\" = quotesquotes");
+            
             Logger.Info("Outputing tags");
             output.Add("Tags: ");
-            output.AddRange(watchedTagStr);
+            output.Add(string.Join(" ", watchedTagStr));
             output.Add("");
             Logger.Info("Outputing companys");
             output.Add("Companys: ");
-            output.AddRange(watchedConpanyStr);
+            output.Add(string.Join(" ", watchedConpanyStr));
             
             string outputPath = System.IO.Path.Combine(Output.OutputPath, "AnimeReport.md");
             Logger.Info("Write into: " + outputPath + "...");

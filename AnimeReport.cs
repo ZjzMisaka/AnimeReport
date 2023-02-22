@@ -472,7 +472,7 @@ namespace AnalyzeCode
             output.Add("");
             
             output.Add("The tag cloud can be generated from the following contents. <br/>");
-            output.Add("Note: \" \" = space, \".\" = tenten, \"-\" = lineline, \"'\" = quotesquotes <br/>");
+            output.Add("Note: \" \" = spacespace, \".\" = tenten, \"-\" = lineline, \"'\" = quotesquotes <br/>");
             
             Logger.Info("Outputing tags");
             output.Add("Tags: <br/>");

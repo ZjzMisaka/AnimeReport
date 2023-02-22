@@ -99,6 +99,11 @@ namespace AnalyzeCode
         /// <param name="invokeCount">この分析関数が呼び出された回数</param>
         public void AnalyzeSheet(Param param, IXLWorksheet sheet, string filePath, ref Object globalObject, bool isExecuteInSequence, int invokeCount)
         {
+            if (sheet.Visibility != XLWorksheetVisibility.Visible)
+            {
+                return;
+            }
+        
             List<Anime> animeList = new List<Anime>();
         
             string year = sheet.Name.Substring(0, 4);
@@ -314,34 +319,37 @@ namespace AnalyzeCode
                 {
                     continue;
                 }
-                Logger.Info("Waiting...");
-                Thread.Sleep(3000);
-                Logger.Info("Getting tags...");
-                var results = aniClient.SearchMediaAsync(new SearchMediaFilter
+                if (param.Get("Option").Contains("GetTag"))
                 {
-                   Query = anime.origName,
-                   Type = MediaType.Anime,
-                   Sort = MediaSort.Relevance,
-                   Format = new Dictionary<MediaFormat, bool>
-                   {
-                      { MediaFormat.TV, true }, // set to only search for TV shows and movies
-                      { MediaFormat.TVShort, true } // set to not show TV shorts
-                   }
-                }).Result;
-                if (results == null || results.Data == null || results.Data.Length == 0)
-                {
-                    Logger.Info(anime.name + ": Tag not found. ");
-                }
-                else
-                {
-                    Media media = results.Data[0];
-                    anime.tags = aniClient.GetMediaTagsAsync(media.Id).Result;
-                    string tagStr = "";
-                    foreach (MediaTag tag in anime.tags)
+                    Logger.Info("Waiting...");
+                    Thread.Sleep(3000);
+                    Logger.Info("Getting tags...");
+                    var results = aniClient.SearchMediaAsync(new SearchMediaFilter
                     {
-                        tagStr += " " + tag.Name.Replace(" ", "-");
+                       Query = anime.origName,
+                       Type = MediaType.Anime,
+                       Sort = MediaSort.Relevance,
+                       Format = new Dictionary<MediaFormat, bool>
+                       {
+                          { MediaFormat.TV, true }, // set to only search for TV shows and movies
+                          { MediaFormat.TVShort, true } // set to not show TV shorts
+                       }
+                    }).Result;
+                    if (results == null || results.Data == null || results.Data.Length == 0)
+                    {
+                        Logger.Info(anime.name + ": Tag not found. ");
                     }
-                    Logger.Info(anime.name + ":" + tagStr);
+                    else
+                    {
+                        Media media = results.Data[0];
+                        anime.tags = aniClient.GetMediaTagsAsync(media.Id).Result;
+                        string tagStr = "";
+                        foreach (MediaTag tag in anime.tags)
+                        {
+                            tagStr += " " + tag.Name.Replace(" ", "-");
+                        }
+                        Logger.Info(anime.name + ":" + tagStr);
+                    }
                 }
             }
             
@@ -386,7 +394,6 @@ namespace AnalyzeCode
             
             List<string> output = new List<string>();
             output.Add("# AnimeReport");
-            output.Add("");
             
             Logger.Info("Output start");
             output.Add("### " + "自" + yearList[0] + "年到" + yearList.Last() + "年, 共观看TV动画" + tvWatched + "部, 弃番" + tvGaveUp +"部, 弃番率" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%");
@@ -449,7 +456,7 @@ namespace AnalyzeCode
             int outputedHighScore = 0;
             foreach (Anime anime in sortedAnime)
             {
-                if (outputedHighScore == 10)
+                if (outputedHighScore == int.Parse(param.GetOne("HighScoreListCount")))
                 {
                     break;
                 }
@@ -464,18 +471,18 @@ namespace AnalyzeCode
             output.Add("</details>");
             output.Add("");
             
-            output.Add("The tag cloud can be generated from the following contents.");
-            output.Add("Note: \" \" = space, \".\" = tenten, \"-\" = lineline, \"'\" = quotesquotes");
+            output.Add("The tag cloud can be generated from the following contents. <br/>");
+            output.Add("Note: \" \" = space, \".\" = tenten, \"-\" = lineline, \"'\" = quotesquotes <br/>");
             
             Logger.Info("Outputing tags");
-            output.Add("Tags: ");
-            output.Add(string.Join(" ", watchedTagStr));
-            output.Add("");
+            output.Add("Tags: <br/>");
+            output.Add(string.Join(" ", watchedTagStr) + "<br/>");
+            output.Add("<br/>");
             Logger.Info("Outputing companys");
-            output.Add("Companys: ");
+            output.Add("Companys: <br/>");
             output.Add(string.Join(" ", watchedConpanyStr));
             
-            string outputPath = System.IO.Path.Combine(Output.OutputPath, "AnimeReport.md");
+            string outputPath = System.IO.Path.Combine(Output.OutputPath, "README.md");
             Logger.Info("Write into: " + outputPath + "...");
             System.IO.File.WriteAllLines(outputPath, output);
             Logger.Info("OK");

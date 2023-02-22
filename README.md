@@ -1,12 +1,10 @@
 # AnimeReport
 ### 观看TV动画466部, 弃番12部, 弃番率2.51%
 
-### Favourite Tags
+|Favourite Tags|Favourite Production Company|
+|----|----|
+|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.png)|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.png)|
 - Excluded the two tags "Male protagonist" and "Female protagonist"
-![](https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.png)
-
-### Favourite Production Company
-![](https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.png)
 
 <details>
   <summary>Report of 2004, Autumn count: 1</summary>

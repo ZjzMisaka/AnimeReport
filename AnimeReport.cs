@@ -72,7 +72,7 @@ namespace AnalyzeCode
         
         private string ReplaceChars(string str)
         {
-            return str.Replace(" ", "spacespace").Replace(".", "tenten").Replace("-", "lineline").Replace("'", "quotesquotes");
+            return str.Replace(" ", "spacespace").Replace(".", "tenten").Replace("-", "lineline").Replace("'", "quotesquotes").Replace("、", " ");
         }
         
         /// <summary>
@@ -317,9 +317,12 @@ namespace AnalyzeCode
                 int count = 0;
                 foreach(Anime anime in thisYearAnimeList)
                 {
-                    if (anime.status == Status.Watched)
+                    if (anime.animeType == AnimeType.TV || anime.animeType == AnimeType.WEB)
                     {
-                        ++count;
+                        if (anime.status == Status.Watched)
+                        {
+                            ++count;
+                        }
                     }
                 }
                 countDic[year] = count;
@@ -333,7 +336,7 @@ namespace AnalyzeCode
             foreach(Anime anime in animeList)
             {
                 Logger.Info("Anime: " + anime.name);
-                if (anime.status != Status.Watched || anime.animeType != AnimeType.TV)
+                if (anime.status != Status.Watched || (anime.animeType != AnimeType.TV && anime.animeType != AnimeType.WEB))
                 {
                     continue;
                 }
@@ -378,7 +381,7 @@ namespace AnalyzeCode
             int tvGaveUp = 0;
             foreach(Anime anime in animeList)
             {
-                if (anime.animeType != AnimeType.TV)
+                if (anime.animeType != AnimeType.TV && anime.animeType != AnimeType.WEB)
                 {
                     continue;
                 }
@@ -414,7 +417,7 @@ namespace AnalyzeCode
             output.Add("# AnimeReport");
             
             Logger.Info("Output start");
-            output.Add("### " + "自" + yearList[0] + "年到" + yearList.Last() + "年, 共观看TV动画" + tvWatched + "部, 弃番" + tvGaveUp +"部, 弃番率" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%");
+            output.Add("### " + "自" + yearList[0] + "年到" + yearList.Last() + "年, 共观看动画" + tvWatched + "部 (OVA与OAD除外), 弃番" + tvGaveUp +"部, 弃番率" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%");
             output.Add("");
             
             output.Add("|Favourite Tags|Favourite Production Company|");
@@ -487,7 +490,7 @@ namespace AnalyzeCode
             
             Logger.Info("Outputing year-season list");
             IEnumerable<IGrouping<string, Anime>> groupedResults = animeList
-                .Where(a => a.animeType == AnimeType.TV && (a.status == Status.Watched || a.status == Status.GaveUp))
+                .Where(a => (a.animeType == AnimeType.TV || a.animeType == AnimeType.WEB) && (a.status == Status.Watched || a.status == Status.GaveUp))
                 .GroupBy(k => k.year + "|" + k.season, v => v);
                 IEnumerable<IGrouping<string, Anime>> groupedResultsReversed = groupedResults.Reverse();
             foreach(IGrouping<string, Anime> animeGroup in groupedResultsReversed)
@@ -497,7 +500,7 @@ namespace AnalyzeCode
                 string season = animeGroup.Key.Split('|')[1];
                 Logger.Info("Outputing " + year + ", " + season);
                 int count = animeGroup.Count<Anime>();
-                output.Add("  <summary>Report of " + year + ", " + season + " count: " + count + "</summary>");
+                output.Add("  <summary>Report of " + year + ", " + season + " | count: " + count + "</summary>");
                 output.Add("");
                 output.Add("  |中文名|Name|Status|Score|");
                 output.Add("  |----|----|----|----|");
@@ -530,7 +533,7 @@ namespace AnalyzeCode
             Logger.Info("Outputing high score list");
             List<Anime> sortedAnime = animeList.OrderBy(x => x.score).Reverse().ToList();
             output.Add("<details>");
-            output.Add("  <summary>High score list (tv)</summary>");
+            output.Add("  <summary>High score list (tv, web)</summary>");
             output.Add("");
             output.Add("  |中文名|Name|Score|");
             output.Add("  |----|----|----|");
@@ -541,7 +544,7 @@ namespace AnalyzeCode
                 {
                     break;
                 }
-                if (anime.animeType != AnimeType.TV)
+                if (anime.animeType != AnimeType.TV && anime.animeType != AnimeType.WEB)
                 {
                     continue;
                 }
@@ -552,9 +555,11 @@ namespace AnalyzeCode
             output.Add("</details>");
             output.Add("");
             
+            output.Add("<details>");
+            output.Add("  <summary>hide</summary>");
+            output.Add("");
             output.Add("The tag cloud can be generated from the following contents. <br/>");
             output.Add("Note: \" \" = spacespace, \".\" = tenten, \"-\" = lineline, \"'\" = quotesquotes <br/>");
-            
             Logger.Info("Outputing tags");
             output.Add("Tags: <br/>");
             output.Add(string.Join(" ", watchedTagStr) + "<br/>");
@@ -562,6 +567,7 @@ namespace AnalyzeCode
             Logger.Info("Outputing companys");
             output.Add("Companys: <br/>");
             output.Add(string.Join(" ", watchedConpanyStr));
+            output.Add("</details>");
             
             string outputPath = System.IO.Path.Combine(Output.OutputPath, "README.md");
             Logger.Info("Write into: " + outputPath + "...");

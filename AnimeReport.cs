@@ -422,6 +422,7 @@ namespace AnalyzeCode
             output.Add("|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.png)|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.png)|");
             output.Add("- Excluded the two tags \"Male protagonist\" and \"Female protagonist\"");
             
+            Logger.Info("Outputing chart...");
             output.Add("");
             List<string> lines = new List<string>();
             for (int i = 0; i < 10; ++i)
@@ -454,22 +455,22 @@ namespace AnalyzeCode
                     int now = (maxCount - i * step);
                     if (count >= now)
                     {
-                        lines[i] = lines[i] + "■■■■";
+                        lines[i] = lines[i] + " ■■■■";
                     }
                     else
                     {
                         if (i == 9 && count > 0)
                         {
-                            lines[i] = lines[i] + "₋₋₋₋";
+                            lines[i] = lines[i] + " ₋₋₋₋";
                         }
                         else
                         {
-                            lines[i] = lines[i] + "    ";
+                            lines[i] = lines[i] + "     ";
                         }
                     }
                 }
-                baseStr += "━━━━";
-                yearsStr += " " + year.Substring(2) + " ";
+                baseStr += "━━━━━";
+                yearsStr += " " + year;
             }
             foreach (string line in lines)
             {

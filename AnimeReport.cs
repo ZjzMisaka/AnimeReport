@@ -436,7 +436,7 @@ namespace AnalyzeCode
                 ++maxCount;
             }
             int step = maxCount / 10;
-            output.Add("### Annual animation watching statistics map");
+            output.Add("### Annual animation watching statistics map (last 20 years)");
             output.Add("````");
             for (int i = 0; i < 10; ++i)
             {
@@ -446,6 +446,10 @@ namespace AnalyzeCode
                     now = " " + now;
                 }
                 lines[i] = now;
+            }
+            if (yearList.Count() > 20)
+            {
+                yearList = yearList.GetRange(yearList.Count() - 20, 20);
             }
             foreach (string year in yearList)
             {

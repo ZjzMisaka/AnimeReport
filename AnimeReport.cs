@@ -9,6 +9,11 @@ using System.Collections.Generic;
 using AniListNet;
 using AniListNet.Objects;
 using AniListNet.Parameters;
+using TagCloudGenerator;
+using System.Drawing.Text;
+using Color = System.Drawing.Color;
+using FontFamily = System.Drawing.FontFamily;
+using System.Drawing;
 
 namespace AnalyzeCode
 {
@@ -375,8 +380,8 @@ namespace AnalyzeCode
             }
             
             Logger.Info("Getting total data...");
-            List<string> watchedTagStr = new List<string>();
-            List<string> watchedConpanyStr = new List<string>();
+            Dictionary<string, int> watchedTagStr = new Dictionary<string, int>();
+            Dictionary<string, int> watchedConpanyStr = new Dictionary<string, int>();
             int tvWatched = 0;
             int tvGaveUp = 0;
             foreach(Anime anime in animeList)
@@ -389,7 +394,6 @@ namespace AnalyzeCode
                 {
                     Logger.Info(anime.name + " watched");
                     ++tvWatched;
-                    List<string> tagStr = new List<string>();
                     if (anime.tags != null && anime.tags.Length > 0)
                     {
                         Logger.Info("getting tag");
@@ -399,11 +403,24 @@ namespace AnalyzeCode
                             {
                                 continue;
                             }
-                            tagStr.Add(ReplaceChars(tag.Name));
+                            if (!watchedTagStr.ContainsKey(tag.Name))
+                            {
+                                watchedTagStr[tag.Name] = 1;
+                            }
+                            else
+                            {
+                                watchedTagStr[tag.Name] += 1;
+                            }
                         }
                     
-                        watchedTagStr.AddRange(tagStr);
-                        watchedConpanyStr.Add(ReplaceChars(anime.productionCompany));
+                        if (!watchedConpanyStr.ContainsKey(anime.productionCompany))
+                        {
+                            watchedConpanyStr[anime.productionCompany] = 1;
+                        }
+                        else
+                        {
+                            watchedConpanyStr[anime.productionCompany] += 1;
+                        }
                     }
                 }
                 if (anime.status == Status.GaveUp)
@@ -555,19 +572,19 @@ namespace AnalyzeCode
             output.Add("</details>");
             output.Add("");
             
-            output.Add("<details>");
-            output.Add("  <summary>hide</summary>");
-            output.Add("");
-            output.Add("The tag cloud can be generated from the following contents. <br/>");
-            output.Add("Note: \" \" = spacespace, \".\" = tenten, \"-\" = lineline, \"'\" = quotesquotes <br/>");
-            Logger.Info("Outputing tags");
-            output.Add("Tags: <br/>");
-            output.Add(string.Join(" ", watchedTagStr) + "<br/>");
-            output.Add("<br/>");
-            Logger.Info("Outputing companys");
-            output.Add("Companys: <br/>");
-            output.Add(string.Join(" ", watchedConpanyStr));
-            output.Add("</details>");
+            TagCloudOption tagCloudOption = new TagCloudOption();
+            tagCloudOption.RotateList = new List<int> { 15, -15 };
+            tagCloudOption.FontColorList = new List<Color> { Color.Red, Color.Orange, Color.OrangeRed };
+            PrivateFontCollection collection = new PrivateFontCollection();
+            collection.AddFontFile(param.GetOne("TtfFile"));
+            FontFamily fontFamily = new FontFamily("Lolita", collection);
+            tagCloudOption.FontFamily = fontFamily;
+            Logger.Info("Making tags.bmp...");
+            Bitmap bmpTag = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
+            bmpTag.Save("tags.bmp");
+            Logger.Info("Making companies.bmp...");
+            Bitmap bmpCompany = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
+            bmpCompany.Save("companies.bmp");
             
             string outputPath = System.IO.Path.Combine(Output.OutputPath, "README.md");
             Logger.Info("Write into: " + outputPath + "...");

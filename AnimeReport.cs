@@ -380,8 +380,8 @@ namespace AnalyzeCode
             }
             
             Logger.Info("Getting total data...");
-            Dictionary<string, int> watchedTagStr = new Dictionary<string, int>();
-            Dictionary<string, int> watchedConpanyStr = new Dictionary<string, int>();
+            Dictionary<string, float> watchedTagStr = new Dictionary<string, float>();
+            Dictionary<string, float> watchedConpanyStr = new Dictionary<string, float>();
             int tvWatched = 0;
             int tvGaveUp = 0;
             foreach(Anime anime in animeList)
@@ -572,19 +572,34 @@ namespace AnalyzeCode
             output.Add("</details>");
             output.Add("");
             
-            TagCloudOption tagCloudOption = new TagCloudOption();
-            tagCloudOption.RotateList = new List<int> { 15, -15 };
-            tagCloudOption.FontColorList = new List<Color> { Color.Red, Color.Orange, Color.OrangeRed };
             PrivateFontCollection collection = new PrivateFontCollection();
             collection.AddFontFile(param.GetOne("TtfFile"));
             FontFamily fontFamily = new FontFamily("Lolita", collection);
+            TagCloudOption tagCloudOption = new TagCloudOption();
             tagCloudOption.FontFamily = fontFamily;
+            tagCloudOption.RotateList = new List<int> { 0, 90 };
+            tagCloudOption.BackgroundColor = Color.White;
+            tagCloudOption.FontColorList = new List<Color>() { Color.FromArgb(81, 148, 240) };
+            tagCloudOption.FontSizeRange = (8, 90);
+            tagCloudOption.Margin = 3;
             Logger.Info("Making tags.bmp...");
             Bitmap bmpTag = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
             bmpTag.Save("tags.bmp");
+            while (Scanner.GetInput("确认使用? ") != "1")
+            {
+                Logger.Info("Making tags.bmp...");
+                bmpTag = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
+                bmpTag.Save("tags.bmp");
+            }
             Logger.Info("Making companies.bmp...");
             Bitmap bmpCompany = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
             bmpCompany.Save("companies.bmp");
+            while (Scanner.GetInput("确认使用? ") != "1")
+            {
+                Logger.Info("Making companies.bmp...");
+                bmpCompany = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
+                bmpCompany.Save("companies.bmp");
+            }
             
             string outputPath = System.IO.Path.Combine(Output.OutputPath, "README.md");
             Logger.Info("Write into: " + outputPath + "...");

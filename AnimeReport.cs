@@ -28,12 +28,11 @@ namespace AnalyzeCode
             public string origName;
             public string productionCompany;
             
-            public MediaTag[] tags;
-            
             public Status status;
             public bool planToWatch;
             public int score;
             public string comment;
+            public List<string> tagListFromLocal;
         }
         
         public enum Status { NeverWatched, Watching, Watched, GaveUp };
@@ -120,6 +119,8 @@ namespace AnalyzeCode
             int nameCol = -1;
             int origNameCol = -1;
             int productionCompanyCol = -1;
+            
+            AniClient aniClient = new AniClient();
             
             while (true)
             {
@@ -285,6 +286,53 @@ namespace AnalyzeCode
                 }
                 anime.score = IsBlank(sheet, nowRow, 13) ? -1 : int.Parse(sheet.Cell(nowRow, 13).CachedValue.ToString());
                 anime.comment = sheet.Cell(nowRow, 14).CachedValue.ToString();
+                string tagsStr = sheet.Cell(nowRow, 15).CachedValue.ToString();
+                if (!string.IsNullOrEmpty(tagsStr))
+                {
+                    anime.tagListFromLocal = tagsStr.Trim().Split('\n').ToList();
+                }
+                
+                if (anime.status == Status.Watched && (anime.animeType == AnimeType.TV || anime.animeType == AnimeType.WEB))
+                {
+                    if (param.Get("Option").Contains("GetTag") && (anime.tagListFromLocal == null || anime.tagListFromLocal.Count == 0))
+                    {
+                        Logger.Info("Waiting...");
+                        Thread.Sleep(3000);
+                        Logger.Info("Getting tags...");
+                        var results = aniClient.SearchMediaAsync(new SearchMediaFilter
+                        {
+                           Query = anime.origName,
+                           Type = MediaType.Anime,
+                           Sort = MediaSort.Relevance,
+                           Format = new Dictionary<MediaFormat, bool>
+                           {
+                              { MediaFormat.TV, true }, // set to only search for TV shows and movies
+                              { MediaFormat.TVShort, true } // set to not show TV shorts
+                           }
+                        }).Result;
+                        if (results == null || results.Data == null || results.Data.Length == 0)
+                        {
+                            Logger.Info(anime.name + ": Tag not found. ");
+                        }
+                        else
+                        {
+                            anime.tagListFromLocal = new List<string>();
+                            Media media = results.Data[0];
+                            MediaTag[] tags = aniClient.GetMediaTagsAsync(media.Id).Result;
+                            string tagStr = "";
+                            string inputTagStr = "";
+                            foreach (MediaTag tag in tags)
+                            {
+                                anime.tagListFromLocal.Add(tag.Name);
+                                tagStr += " " + tag.Name.Replace(" ", "-");
+                                inputTagStr += tag.Name + "\n";
+                            }
+                            inputTagStr = inputTagStr.Trim();
+                            sheet.Cell(nowRow, 15).SetValue(inputTagStr);
+                            Logger.Info(anime.name + ":" + tagStr);
+                        }
+                    }
+                }
                 
                 animeList.Add(anime);
                 ++nowRow;
@@ -294,6 +342,10 @@ namespace AnalyzeCode
                     Logger.Info(anime.year + " " + anime.season + ": " + anime.name);
                 }
             }
+            
+            Logger.Info("Saving...");
+            // sheet.Workbook.Save();
+            Logger.Info("Saved");
             
             GlobalDic.SetObj(year, animeList);
             ((List<string>)globalObject).Add(year);
@@ -309,7 +361,6 @@ namespace AnalyzeCode
         /// <param name="isExecuteInSequence">順番実行するかどうか</param>
         public void RunBeforeSetResult(Param param, XLWorkbook workbook, ref Object globalObject, List<string> allFilePathList, bool isExecuteInSequence)
         {
-            AniClient aniClient = new AniClient();
             List<string> yearList = (List<string>)globalObject;
             List<Anime> animeList = new List<Anime>();
             
@@ -337,48 +388,6 @@ namespace AnalyzeCode
                 }
             }
             
-            
-            foreach(Anime anime in animeList)
-            {
-                Logger.Info("Anime: " + anime.name);
-                if (anime.status != Status.Watched || (anime.animeType != AnimeType.TV && anime.animeType != AnimeType.WEB))
-                {
-                    continue;
-                }
-                if (param.Get("Option").Contains("GetTag"))
-                {
-                    Logger.Info("Waiting...");
-                    Thread.Sleep(3000);
-                    Logger.Info("Getting tags...");
-                    var results = aniClient.SearchMediaAsync(new SearchMediaFilter
-                    {
-                       Query = anime.origName,
-                       Type = MediaType.Anime,
-                       Sort = MediaSort.Relevance,
-                       Format = new Dictionary<MediaFormat, bool>
-                       {
-                          { MediaFormat.TV, true }, // set to only search for TV shows and movies
-                          { MediaFormat.TVShort, true } // set to not show TV shorts
-                       }
-                    }).Result;
-                    if (results == null || results.Data == null || results.Data.Length == 0)
-                    {
-                        Logger.Info(anime.name + ": Tag not found. ");
-                    }
-                    else
-                    {
-                        Media media = results.Data[0];
-                        anime.tags = aniClient.GetMediaTagsAsync(media.Id).Result;
-                        string tagStr = "";
-                        foreach (MediaTag tag in anime.tags)
-                        {
-                            tagStr += " " + tag.Name.Replace(" ", "-");
-                        }
-                        Logger.Info(anime.name + ":" + tagStr);
-                    }
-                }
-            }
-            
             Logger.Info("Getting total data...");
             Dictionary<string, float> watchedTagStr = new Dictionary<string, float>();
             Dictionary<string, float> watchedConpanyStr = new Dictionary<string, float>();
@@ -394,22 +403,22 @@ namespace AnalyzeCode
                 {
                     Logger.Info(anime.name + " watched");
                     ++tvWatched;
-                    if (anime.tags != null && anime.tags.Length > 0)
+                    if (anime.tagListFromLocal != null && anime.tagListFromLocal.Count > 0)
                     {
                         Logger.Info("getting tag");
-                        foreach (MediaTag tag in anime.tags)
+                        foreach (string tag in anime.tagListFromLocal)
                         {
-                            if (tag.Name.ToLower() == "female protagonist" || tag.Name.ToLower() == "male protagonist")
+                            if (tag.ToLower() == "female protagonist" || tag.ToLower() == "male protagonist")
                             {
                                 continue;
                             }
-                            if (!watchedTagStr.ContainsKey(tag.Name))
+                            if (!watchedTagStr.ContainsKey(tag))
                             {
-                                watchedTagStr[tag.Name] = 1;
+                                watchedTagStr[tag] = 1;
                             }
                             else
                             {
-                                watchedTagStr[tag.Name] += 1;
+                                watchedTagStr[tag] += 1;
                             }
                         }
                     
@@ -580,25 +589,27 @@ namespace AnalyzeCode
             tagCloudOption.RotateList = new List<int> { 0, 90 };
             tagCloudOption.BackgroundColor = Color.White;
             tagCloudOption.FontColorList = new List<Color>() { Color.FromArgb(81, 148, 240) };
-            tagCloudOption.FontSizeRange = (8, 90);
-            tagCloudOption.Margin = 3;
+            tagCloudOption.FontSizeRange = (6, 90);
+            tagCloudOption.Margin = 2;
+            tagCloudOption.AngleStep = 1;
+            tagCloudOption.RadiusStep = 1;
             Logger.Info("Making tags.bmp...");
-            Bitmap bmpTag = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
-            bmpTag.Save("tags.bmp");
+            Bitmap bmpTag = new TagCloud(2000, 1500, watchedTagStr, tagCloudOption).Get();
+            bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
             while (Scanner.GetInput("确认使用? ") != "1")
             {
                 Logger.Info("Making tags.bmp...");
-                bmpTag = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
-                bmpTag.Save("tags.bmp");
+                bmpTag = new TagCloud(2000, 1500, watchedTagStr, tagCloudOption).Get();
+                bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
             }
             Logger.Info("Making companies.bmp...");
-            Bitmap bmpCompany = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
-            bmpCompany.Save("companies.bmp");
+            Bitmap bmpCompany = new TagCloud(1000, 750, watchedConpanyStr, tagCloudOption).Get();
+            bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
             while (Scanner.GetInput("确认使用? ") != "1")
             {
                 Logger.Info("Making companies.bmp...");
-                bmpCompany = new TagCloud(1920, 1080, watchedTagStr, tagCloudOption).Get();
-                bmpCompany.Save("companies.bmp");
+                bmpCompany = new TagCloud(2000, 1500, watchedConpanyStr, tagCloudOption).Get();
+                bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
             }
             
             string outputPath = System.IO.Path.Combine(Output.OutputPath, "README.md");

@@ -3,12 +3,12 @@
 
 <table>
   <tr>
-    <th>Favourite Tags</th>
-    <th>Favourite Production Company</th>
-  </tr>
-  <tr>
     <td><a href="https://github.com/ZjzMisaka/AnimeReport"><img width=1000 align="center" src="https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.bmp" title="AnimeReport"/></a></td>
     <td><a href="https://github.com/ZjzMisaka/AnimeReport"><img width=1000 align="center" src="https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.bmp" title="AnimeReport"/></a></td>
+  </tr>
+  <tr>
+    <th>Favourite Tags</th>
+    <th>Favourite Production Company</th>
   </tr>
 </table>
 - Excluded the two tags "Male protagonist" and "Female protagonist"

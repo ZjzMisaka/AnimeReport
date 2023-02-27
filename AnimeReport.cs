@@ -449,12 +449,12 @@ namespace AnalyzeCode
             
             output.Add("<table>");
             output.Add("  <tr>");
-            output.Add("    <th>Favourite Tags</th>");
-            output.Add("    <th>Favourite Production Company</th>");
-            output.Add("  </tr>");
-            output.Add("  <tr>");
             output.Add("    <td><a href=\"https://github.com/ZjzMisaka/AnimeReport\"><img width=1000 align=\"center\" src=\"https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.bmp\" title=\"AnimeReport\"/></a></td>");
             output.Add("    <td><a href=\"https://github.com/ZjzMisaka/AnimeReport\"><img width=1000 align=\"center\" src=\"https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.bmp\" title=\"AnimeReport\"/></a></td>");
+            output.Add("  </tr>");
+            output.Add("  <tr>");
+            output.Add("    <th>Favourite Tags</th>");
+            output.Add("    <th>Favourite Production Company</th>");
             output.Add("  </tr>");
             output.Add("</table>");
             output.Add("- Excluded the two tags \"Male protagonist\" and \"Female protagonist\"");

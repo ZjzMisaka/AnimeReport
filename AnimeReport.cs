@@ -446,9 +446,17 @@ namespace AnalyzeCode
             output.Add("### " + "自" + yearList[0] + "年到" + yearList.Last() + "年, 共观看动画" + tvWatched + "部 (OVA与OAD除外), 弃番" + tvGaveUp +"部, 弃番率" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%");
             output.Add("");
             
-            output.Add("|Favourite Tags|Favourite Production Company|");
-            output.Add("|----|----|");
-            output.Add("|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.png)|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.png)|");
+            
+            output.Add("<table>");
+            output.Add("  <tr>");
+            output.Add("    <th>Favourite Tags</th>");
+            output.Add("    <th>Favourite Production Company</th>");
+            output.Add("  </tr>");
+            output.Add("  <tr>");
+            output.Add("    <td><a href=\"https://github.com/ZjzMisaka/AnimeReport\"><img width=1000 align=\"center\" src=\"https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.bmp\" title=\"AnimeReport\"/></a></td>");
+            output.Add("    <td><a href=\"https://github.com/ZjzMisaka/AnimeReport\"><img width=1000 align=\"center\" src=\"https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.bmp\" title=\"AnimeReport\"/></a></td>");
+            output.Add("  </tr>");
+            output.Add("</table>");
             output.Add("- Excluded the two tags \"Male protagonist\" and \"Female protagonist\"");
             
             Logger.Info("Outputing chart...");
@@ -608,7 +616,7 @@ namespace AnalyzeCode
             while (Scanner.GetInput("确认使用? ") != "1")
             {
                 Logger.Info("Making companies.bmp...");
-                bmpCompany = new TagCloud(2000, 1500, watchedConpanyStr, tagCloudOption).Get();
+                bmpCompany = new TagCloud(1000, 750, watchedConpanyStr, tagCloudOption).Get();
                 bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
             }
             

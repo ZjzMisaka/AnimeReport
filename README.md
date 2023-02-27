@@ -1,9 +1,16 @@
 # AnimeReport
 ### 自2000年到2022年, 共观看动画482部 (OVA与OAD除外), 弃番12部, 弃番率2.43%
 
-|Favourite Tags|Favourite Production Company|
-|----|----|
-|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.bmp)|![](https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.bmp)|
+<table>
+  <tr>
+    <th>Favourite Tags</th>
+    <th>Favourite Production Company</th>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/ZjzMisaka/AnimeReport"><img width=1000 align="center" src="https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.bmp" title="AnimeReport"/></a></td>
+    <td><a href="https://github.com/ZjzMisaka/AnimeReport"><img width=1000 align="center" src="https://github.com/ZjzMisaka/AnimeReport/blob/main/companies.bmp" title="AnimeReport"/></a></td>
+  </tr>
+</table>
 - Excluded the two tags "Male protagonist" and "Female protagonist"
 
 ### Annual animation watching statistics map (last 20 years)

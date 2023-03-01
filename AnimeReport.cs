@@ -596,27 +596,33 @@ namespace AnalyzeCode
             tagCloudOption.FontFamily = fontFamily;
             tagCloudOption.RotateList = new List<int> { 0, 90 };
             tagCloudOption.BackgroundColor = Color.White;
-            tagCloudOption.FontColorList = new List<Color>() { Color.FromArgb(81, 148, 240) };
-            tagCloudOption.FontSizeRange = (6, 90);
-            tagCloudOption.Margin = 2;
+            tagCloudOption.FontColorList = new List<Color>() { Color.FromArgb(22, 113, 220) };
+            tagCloudOption.FontSizeRange = (6, 100);
+            tagCloudOption.TagSpacing = 2;
             tagCloudOption.AngleStep = 1;
             tagCloudOption.RadiusStep = 1;
+            tagCloudOption.InitSize = new ImgSize(800, 500);
+            tagCloudOption.HorizontalCanvasGrowthStep = 8;
+            tagCloudOption.VerticalCanvasGrowthStep = 5;
+            tagCloudOption.InitSize = new ImgSize(80, 50);
+            tagCloudOption.VerticalOuterMargin = 3;
+            tagCloudOption.OutputSize = new ImgSize(2400, 1500);
             Logger.Info("Making tags.bmp...");
-            Bitmap bmpTag = new TagCloud(2000, 1500, watchedTagStr, tagCloudOption).Get();
+            Bitmap bmpTag = new TagCloud(watchedTagStr, tagCloudOption).Get();
             bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
-            while (Scanner.GetInput("确认使用? ") != "1")
+            while (Scanner.GetInput("确认使用? 1: 确认, 2: 重新生成") != "1")
             {
                 Logger.Info("Making tags.bmp...");
-                bmpTag = new TagCloud(2000, 1500, watchedTagStr, tagCloudOption).Get();
+                bmpTag = new TagCloud(watchedTagStr, tagCloudOption).Get();
                 bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
             }
             Logger.Info("Making companies.bmp...");
-            Bitmap bmpCompany = new TagCloud(1000, 750, watchedConpanyStr, tagCloudOption).Get();
+            Bitmap bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption).Get();
             bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
-            while (Scanner.GetInput("确认使用? ") != "1")
+            while (Scanner.GetInput("确认使用?  1: 确认, 2: 重新生成") != "1")
             {
                 Logger.Info("Making companies.bmp...");
-                bmpCompany = new TagCloud(1000, 750, watchedConpanyStr, tagCloudOption).Get();
+                bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption).Get();
                 bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
             }
             

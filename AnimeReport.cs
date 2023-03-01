@@ -390,7 +390,9 @@ namespace AnalyzeCode
             
             Logger.Info("Getting total data...");
             Dictionary<string, float> watchedTagStr = new Dictionary<string, float>();
+            Dictionary<string, TagOption> tagOptionDic = new Dictionary<string, TagOption>();
             Dictionary<string, float> watchedConpanyStr = new Dictionary<string, float>();
+            Dictionary<string, TagOption> companyTagOptionDic = new Dictionary<string, TagOption>();
             int tvWatched = 0;
             int tvGaveUp = 0;
             foreach(Anime anime in animeList)
@@ -415,6 +417,10 @@ namespace AnalyzeCode
                             if (!watchedTagStr.ContainsKey(tag))
                             {
                                 watchedTagStr[tag] = 1;
+                                if (watchedTagStr.Keys.Count <= 2)
+                                {
+                                    tagOptionDic[tag] = new TagOption(){ Rotate = 0 };
+                                }
                             }
                             else
                             {
@@ -425,6 +431,10 @@ namespace AnalyzeCode
                         if (!watchedConpanyStr.ContainsKey(anime.productionCompany))
                         {
                             watchedConpanyStr[anime.productionCompany] = 1;
+                            if (watchedConpanyStr.Keys.Count <= 2)
+                                {
+                                    companyTagOptionDic[anime.productionCompany] = new TagOption(){ Rotate = 0 };
+                                }
                         }
                         else
                         {
@@ -607,22 +617,23 @@ namespace AnalyzeCode
             tagCloudOption.InitSize = new ImgSize(80, 50);
             tagCloudOption.VerticalOuterMargin = 3;
             tagCloudOption.OutputSize = new ImgSize(2400, 1500);
+            
             Logger.Info("Making tags.bmp...");
-            Bitmap bmpTag = new TagCloud(watchedTagStr, tagCloudOption).Get();
+            Bitmap bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();
             bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
             while (Scanner.GetInput("确认使用? 1: 确认, 2: 重新生成") != "1")
             {
                 Logger.Info("Making tags.bmp...");
-                bmpTag = new TagCloud(watchedTagStr, tagCloudOption).Get();
+                bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();
                 bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
             }
             Logger.Info("Making companies.bmp...");
-            Bitmap bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption).Get();
+            Bitmap bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption, companyTagOptionDic).Get();
             bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
             while (Scanner.GetInput("确认使用?  1: 确认, 2: 重新生成") != "1")
             {
                 Logger.Info("Making companies.bmp...");
-                bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption).Get();
+                bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption, companyTagOptionDic).Get();
                 bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
             }
             

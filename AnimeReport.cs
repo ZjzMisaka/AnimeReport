@@ -417,10 +417,6 @@ namespace AnalyzeCode
                             if (!watchedTagStr.ContainsKey(tag))
                             {
                                 watchedTagStr[tag] = 1;
-                                if (watchedTagStr.Keys.Count <= 2)
-                                {
-                                    tagOptionDic[tag] = new TagOption(){ Rotate = 0 };
-                                }
                             }
                             else
                             {
@@ -431,10 +427,6 @@ namespace AnalyzeCode
                         if (!watchedConpanyStr.ContainsKey(anime.productionCompany))
                         {
                             watchedConpanyStr[anime.productionCompany] = 1;
-                            if (watchedConpanyStr.Keys.Count <= 2)
-                                {
-                                    companyTagOptionDic[anime.productionCompany] = new TagOption(){ Rotate = 0 };
-                                }
                         }
                         else
                         {
@@ -448,6 +440,15 @@ namespace AnalyzeCode
                     ++tvGaveUp;
                 }
             }
+            
+            watchedTagStr = watchedTagStr.OrderBy(x => x.Value).Reverse().ToDictionary(x => x.Key, x => x.Value);
+            watchedConpanyStr = watchedConpanyStr.OrderBy(x => x.Value).Reverse().ToDictionary(x => x.Key, x => x.Value);
+            tagOptionDic[watchedTagStr.Keys.ElementAt(0)] = new TagOption(){ Rotate = 0 };
+            tagOptionDic[watchedTagStr.Keys.ElementAt(1)] = new TagOption(){ Rotate = 0 };
+            tagOptionDic[watchedTagStr.Keys.ElementAt(2)] = new TagOption(){ Rotate = 0 };
+            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(0)] = new TagOption(){ Rotate = 0 };
+            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(1)] = new TagOption(){ Rotate = 0 };
+            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(2)] = new TagOption(){ Rotate = 0 };
             
             List<string> output = new List<string>();
             output.Add("# AnimeReport");
@@ -627,6 +628,10 @@ namespace AnalyzeCode
                 bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();
                 bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
             }
+            
+            tagCloudOption.TagSpacing = 4;
+            tagCloudOption.FontSizeRange = (12, 200);
+            
             Logger.Info("Making companies.bmp...");
             Bitmap bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption, companyTagOptionDic).Get();
             bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));

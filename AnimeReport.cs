@@ -468,6 +468,7 @@ namespace AnalyzeCode
             output.Add("    <th>Favourite Production Company</th>");
             output.Add("  </tr>");
             output.Add("</table>");
+            output.Add("");
             output.Add("- Excluded the two tags \"Male protagonist\" and \"Female protagonist\"");
             
             Logger.Info("Outputing chart...");

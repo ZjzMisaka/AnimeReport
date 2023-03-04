@@ -11,6 +11,7 @@
     <th>Favourite Production Company</th>
   </tr>
 </table>
+
 - Excluded the two tags "Male protagonist" and "Female protagonist"
 
 ### Annual animation watching statistics map (last 20 years)

@@ -424,13 +424,23 @@ namespace AnalyzeCode
                             }
                         }
                     
-                        if (!watchedConpanyStr.ContainsKey(anime.productionCompany))
+                        string[] productionCompanyList = anime.productionCompany.Split('×', '、', '→', '/');
+                        foreach (string productionCompany in productionCompanyList)
                         {
-                            watchedConpanyStr[anime.productionCompany] = 1;
-                        }
-                        else
-                        {
-                            watchedConpanyStr[anime.productionCompany] += 1;
+                            bool hasContain = false;
+                            foreach (string key in watchedConpanyStr.Keys)
+                            {
+                                if (key.ToUpper() == productionCompany.ToUpper())
+                                {
+                                    watchedConpanyStr[key] += 1;
+                                    hasContain = true;
+                                    break;
+                                }
+                            }
+                            if (!hasContain)
+                            {
+                                watchedConpanyStr[productionCompany] = 1;
+                            }
                         }
                     }
                 }
@@ -619,6 +629,7 @@ namespace AnalyzeCode
             tagCloudOption.InitSize = new ImgSize(80, 50);
             tagCloudOption.VerticalOuterMargin = 3;
             tagCloudOption.OutputSize = new ImgSize(2400, 1500);
+            tagCloudOption.TagSpacing = 4;
             
             Logger.Info("Making tags.bmp...");
             Bitmap bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();
@@ -630,7 +641,6 @@ namespace AnalyzeCode
                 bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
             }
             
-            tagCloudOption.TagSpacing = 4;
             tagCloudOption.FontSizeRange = (12, 200);
             
             Logger.Info("Making companies.bmp...");

@@ -344,7 +344,7 @@ namespace AnalyzeCode
             }
             
             Logger.Info("Saving...");
-            // sheet.Workbook.Save();
+            sheet.Workbook.Save();
             Logger.Info("Saved");
             
             GlobalDic.SetObj(year, animeList);
@@ -611,46 +611,49 @@ namespace AnalyzeCode
             output.Add("</details>");
             output.Add("");
             
-            PrivateFontCollection collection = new PrivateFontCollection();
-            collection.AddFontFile(param.GetOne("TtfFile"));
-            FontFamily fontFamily = new FontFamily("Lolita", collection);
-            TagCloudOption tagCloudOption = new TagCloudOption();
-            tagCloudOption.FontFamily = fontFamily;
-            tagCloudOption.RotateList = new List<int> { 0, 90 };
-            tagCloudOption.BackgroundColor = Color.White;
-            tagCloudOption.FontColorList = new List<Color>() { Color.FromArgb(22, 113, 220) };
-            tagCloudOption.FontSizeRange = (6, 100);
-            tagCloudOption.TagSpacing = 2;
-            tagCloudOption.AngleStep = 1;
-            tagCloudOption.RadiusStep = 1;
-            tagCloudOption.InitSize = new ImgSize(800, 500);
-            tagCloudOption.HorizontalCanvasGrowthStep = 8;
-            tagCloudOption.VerticalCanvasGrowthStep = 5;
-            tagCloudOption.InitSize = new ImgSize(80, 50);
-            tagCloudOption.VerticalOuterMargin = 3;
-            tagCloudOption.OutputSize = new ImgSize(2400, 1500);
-            tagCloudOption.TagSpacing = 4;
-            
-            Logger.Info("Making tags.bmp...");
-            Bitmap bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();
-            bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
-            while (Scanner.GetInput("确认使用? 1: 确认, 2: 重新生成") != "1")
+            if (param.Get("Option").Contains("OutputImg"))
             {
+                PrivateFontCollection collection = new PrivateFontCollection();
+                collection.AddFontFile(param.GetOne("TtfFile"));
+                FontFamily fontFamily = new FontFamily("Lolita", collection);
+                TagCloudOption tagCloudOption = new TagCloudOption();
+                tagCloudOption.FontFamily = fontFamily;
+                tagCloudOption.RotateList = new List<int> { 0, 90 };
+                tagCloudOption.BackgroundColor = Color.White;
+                tagCloudOption.FontColorList = new List<Color>() { Color.FromArgb(22, 113, 220) };
+                tagCloudOption.FontSizeRange = (6, 100);
+                tagCloudOption.TagSpacing = 2;
+                tagCloudOption.AngleStep = 1;
+                tagCloudOption.RadiusStep = 1;
+                tagCloudOption.InitSize = new ImgSize(800, 500);
+                tagCloudOption.HorizontalCanvasGrowthStep = 8;
+                tagCloudOption.VerticalCanvasGrowthStep = 5;
+                tagCloudOption.InitSize = new ImgSize(80, 50);
+                tagCloudOption.VerticalOuterMargin = 3;
+                tagCloudOption.OutputSize = new ImgSize(2400, 1500);
+                tagCloudOption.TagSpacing = 4;
+                
                 Logger.Info("Making tags.bmp...");
-                bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();
+                Bitmap bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();
                 bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
-            }
-            
-            tagCloudOption.FontSizeRange = (12, 200);
-            
-            Logger.Info("Making companies.bmp...");
-            Bitmap bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption, companyTagOptionDic).Get();
-            bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
-            while (Scanner.GetInput("确认使用?  1: 确认, 2: 重新生成") != "1")
-            {
+                while (Scanner.GetInput("确认使用? 1: 确认, 2: 重新生成") != "1")
+                {
+                    Logger.Info("Making tags.bmp...");
+                    bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();
+                    bmpTag.Save(System.IO.Path.Combine(Output.OutputPath, "tags.bmp"));
+                }
+                
+                tagCloudOption.FontSizeRange = (12, 200);
+                
                 Logger.Info("Making companies.bmp...");
-                bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption, companyTagOptionDic).Get();
+                Bitmap bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption, companyTagOptionDic).Get();
                 bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
+                while (Scanner.GetInput("确认使用?  1: 确认, 2: 重新生成") != "1")
+                {
+                    Logger.Info("Making companies.bmp...");
+                    bmpCompany = new TagCloud(watchedConpanyStr, tagCloudOption, companyTagOptionDic).Get();
+                    bmpCompany.Save(System.IO.Path.Combine(Output.OutputPath, "companies.bmp"));
+                }
             }
             
             string outputPath = System.IO.Path.Combine(Output.OutputPath, "README.md");

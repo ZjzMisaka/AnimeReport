@@ -1,5 +1,6 @@
 using ClosedXML.Excel;
 using GlobalObjects;
+using GlobalObjects.Model;
 using System;
 using System.Linq;
 using System.Threading;
@@ -85,8 +86,9 @@ namespace AnalyzeCode
         /// <param name="param">着信パラメータ</param>
         /// <param name="globalObject">グローバルに存在し、現在の行番号など、他の呼び出しで使用する必要のあるデータを保存できます。</param>
         /// <param name="allFilePathList">分析されるすべてのファイルパスのリスト</param>
+        /// <param name="globalizationSetter">国際化文字列の取得</param>
         /// <param name="isExecuteInSequence">順番実行するかどうか</param>
-        public void RunBeforeAnalyzeSheet(Param param, ref Object globalObject, List<string> allFilePathList, bool isExecuteInSequence)
+        public void RunBeforeAnalyzeSheet(Param param, ref Object globalObject, List<string> allFilePathList, GlobalizationSetter globalizationSetter, bool isExecuteInSequence)
         {
             Output.IsSaveDefaultWorkBook = false;
             globalObject = new List<string>();
@@ -99,9 +101,10 @@ namespace AnalyzeCode
         /// <param name="sheet">分析するシート</param>
         /// <param name="filePath">ファイルパス</param>
         /// <param name="globalObject">グローバルに存在し、現在の行番号など、他の呼び出しで使用する必要のあるデータを保存できます。</param>
+        /// <param name="globalizationSetter">国際化文字列の取得</param>
         /// <param name="isExecuteInSequence">順番実行するかどうか</param>
         /// <param name="invokeCount">この分析関数が呼び出された回数</param>
-        public void AnalyzeSheet(Param param, IXLWorksheet sheet, string filePath, ref Object globalObject, bool isExecuteInSequence, int invokeCount)
+        public void AnalyzeSheet(Param param, IXLWorksheet sheet, string filePath, ref Object globalObject, GlobalizationSetter globalizationSetter, bool isExecuteInSequence, int invokeCount)
         {
             if (sheet.Visibility != XLWorksheetVisibility.Visible)
             {
@@ -358,8 +361,9 @@ namespace AnalyzeCode
         /// <param name="workbook">出力用のExcelファイル</param>
         /// <param name="globalObject">グローバルに存在し、現在の行番号など、他の呼び出しで使用する必要のあるデータを保存できます。</param>
         /// <param name="allFilePathList">分析されたすべてのファイルパスのリスト</param>
+        /// <param name="globalizationSetter">国際化文字列の取得</param>
         /// <param name="isExecuteInSequence">順番実行するかどうか</param>
-        public void RunBeforeSetResult(Param param, XLWorkbook workbook, ref Object globalObject, List<string> allFilePathList, bool isExecuteInSequence)
+        public void RunBeforeSetResult(Param param, XLWorkbook workbook, ref Object globalObject, List<string> allFilePathList, GlobalizationSetter globalizationSetter, bool isExecuteInSequence)
         {
             List<string> yearList = (List<string>)globalObject;
             List<Anime> animeList = new List<Anime>();
@@ -669,10 +673,11 @@ namespace AnalyzeCode
         /// <param name="workbook">出力用のExcelファイル</param>
         /// <param name="filePath">ファイルパス</param>
         /// <param name="globalObject">グローバルに存在し、現在の行番号など、他の呼び出しで使用する必要のあるデータを保存できます。</param>
+        /// <param name="globalizationSetter">国際化文字列の取得</param>
         /// <param name="isExecuteInSequence">順番実行するかどうか</param>
         /// <param name="invokeCount">この出力関数が呼び出された回数</param>
         /// <param name="totalCount">出力関数を呼び出す必要がある合計回数</param>
-        public void SetResult(Param param, XLWorkbook workbook, string filePath, ref Object globalObject, bool isExecuteInSequence, int invokeCount, int totalCount)
+        public void SetResult(Param param, XLWorkbook workbook, string filePath, ref Object globalObject, GlobalizationSetter globalizationSetter, bool isExecuteInSequence, int invokeCount, int totalCount)
         {
             
         }
@@ -684,8 +689,9 @@ namespace AnalyzeCode
         /// <param name="workbook">出力用のExcelファイル</param>
         /// <param name="globalObject">グローバルに存在し、現在の行番号など、他の呼び出しで使用する必要のあるデータを保存できます。</param>
         /// <param name="allFilePathList">分析されたすべてのファイルパスのリスト</param>
+        /// <param name="globalizationSetter">国際化文字列の取得</param>
         /// <param name="isExecuteInSequence">順番実行するかどうか</param>
-        public void RunEnd(Param param, XLWorkbook workbook, ref Object globalObject, List<string> allFilePathList, bool isExecuteInSequence)
+        public void RunEnd(Param param, XLWorkbook workbook, ref Object globalObject, List<string> allFilePathList, GlobalizationSetter globalizationSetter, bool isExecuteInSequence)
         {
             
         }

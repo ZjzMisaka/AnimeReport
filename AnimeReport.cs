@@ -346,9 +346,12 @@ namespace AnalyzeCode
                 }
             }
             
-            Logger.Info("Saving...");
-            sheet.Workbook.Save();
-            Logger.Info("Saved");
+            if (param.Get("Option").Contains("GetTag"))
+            {
+                Logger.Info("Saving...");
+                sheet.Workbook.Save();
+                Logger.Info("Saved");
+            }
             
             GlobalDic.SetObj(year, animeList);
             ((List<string>)globalObject).Add(year);
@@ -548,6 +551,31 @@ namespace AnalyzeCode
             output.Add("````");
             output.Add("");
             
+            Logger.Info("Outputing high score list");
+            List<Anime> sortedAnime = animeList.OrderBy(x => x.score).Reverse().ToList();
+            output.Add("<details>");
+            output.Add("  <summary>High score list (tv, web)</summary>");
+            output.Add("");
+            output.Add("  |中文名|Name|Score|");
+            output.Add("  |----|----|----|");
+            int outputedHighScore = 0;
+            foreach (Anime anime in sortedAnime)
+            {
+                if (outputedHighScore == int.Parse(param.GetOne("HighScoreListCount")))
+                {
+                    break;
+                }
+                if (anime.animeType != AnimeType.TV && anime.animeType != AnimeType.WEB)
+                {
+                    continue;
+                }
+                Logger.Info("Outputing high score list: " + anime.name);
+                output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|");
+                ++outputedHighScore;
+            }
+            output.Add("</details>");
+            output.Add("");
+            
             Logger.Info("Outputing year-season list");
             IEnumerable<IGrouping<string, Anime>> groupedResults = animeList
                 .Where(a => (a.animeType == AnimeType.TV || a.animeType == AnimeType.WEB) && (a.status == Status.Watched || a.status == Status.GaveUp))
@@ -586,31 +614,6 @@ namespace AnalyzeCode
                     Logger.Info("Outputing plan to watch: " + anime.name);
                     output.Add("  |" + anime.name + "|" + anime.origName + "|");
                 }
-            }
-            output.Add("</details>");
-            output.Add("");
-            
-            Logger.Info("Outputing high score list");
-            List<Anime> sortedAnime = animeList.OrderBy(x => x.score).Reverse().ToList();
-            output.Add("<details>");
-            output.Add("  <summary>High score list (tv, web)</summary>");
-            output.Add("");
-            output.Add("  |中文名|Name|Score|");
-            output.Add("  |----|----|----|");
-            int outputedHighScore = 0;
-            foreach (Anime anime in sortedAnime)
-            {
-                if (outputedHighScore == int.Parse(param.GetOne("HighScoreListCount")))
-                {
-                    break;
-                }
-                if (anime.animeType != AnimeType.TV && anime.animeType != AnimeType.WEB)
-                {
-                    continue;
-                }
-                Logger.Info("Outputing high score list: " + anime.name);
-                output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|");
-                ++outputedHighScore;
             }
             output.Add("</details>");
             output.Add("");

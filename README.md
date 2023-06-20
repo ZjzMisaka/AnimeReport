@@ -1,6 +1,7 @@
 # AnimeReport
-### 自2000年到2023年, 共观看动画508部 (OVA与OAD除外), 弃番13部, 弃番率2.50%
+### 自2000年到2023年, 共观看动画510部 (OVA与OAD除外), 弃番13部, 弃番率2.49%
 
+- Excluded the two tags "Male protagonist" and "Female protagonist"
 <table>
   <tr>
     <td><a href="https://github.com/ZjzMisaka/AnimeReport"><img width=1000 align="center" src="https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.bmp" title="AnimeReport"/></a></td>
@@ -12,7 +13,23 @@
   </tr>
 </table>
 
-- Excluded the two tags "Male protagonist" and "Female protagonist"
+<details>
+  <summary>Top 10 tags&compines</summary>
+
+  |index |tag|count|company|count|
+  |----|----|----|----|----|
+  |1|Primarily Female Cast|264|J.C.STAFF|33|
+  |2|School|241|A-1 Pictures|25|
+  |3|Cute Girls Doing Cute Things|177|动画工房|24|
+  |4|Heterosexual|169|SILVER LINK.|21|
+  |5|Primarily Teen Cast|149|京都动画|16|
+  |6|Kuudere|139|CloverWorks|15|
+  |7|Tsundere|128|Studio五组|12|
+  |8|Ensemble Cast|124|SHAFT|12|
+  |9|Seinen|113|8bit|11|
+  |10|Magic|113|project No.9|11|
+</details>
+
 
 ### Annual animation watching statistics map (last 20 years)
 ````
@@ -63,7 +80,6 @@
   |天使降临到我身边！|私に天使が舞い降りた!|88|
   |NEW GAME!!（第2期）|NEW GAME!!|88|
   |悠哉日常大王 Repeat（第2期）|のんのんびより りぴーと|88|
-  |鬼灭之刃 刀匠村篇（第3期）|「鬼滅の刃」刀鍛冶の里編|87|
   |BanG Dream! 3rd Season（第3期）|BanG Dream! 3rd Season|87|
   |漫画女孩|こみっくがーるず|87|
   |樱Trick|桜Trick|87|
@@ -75,10 +91,11 @@
   |链锯人|チェンソーマン|85|
   |鬼灭之刃 无限列车篇（电视动画版）|『鬼滅の刃』無限列車編|85|
   |前辈有够烦|先輩がうざい後輩の話|85|
+  |无职转生～到了异世界就拿出真本事～（下半）|無職転生～異世界行ったら本気だす～|85|
 </details>
 
 <details>
-  <summary>Report of 2023, Spring | count: 15</summary>
+  <summary>Report of 2023, Spring | count: 16</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -86,21 +103,22 @@
   |和山田谈场Lv999的恋爱|山田くんとLv999の恋をする|Watched|70|
   |我内心的糟糕念头|僕の心のヤバイやつ|Watched|88|
   |熊熊勇闯异世界 PUNCH！（第2期）|くまクマ熊ベアーぱーんち！|Watched|75|
+  |机战少女Alice Expansion|アリス・ギア・アイギス Expansion|Watched|72|
   |绊之Allele|絆のアリル|Watched|20|
   |偶像大师 灰姑娘女孩 U149|アイドルマスター シンデレラガールズ U149|Watched|96|
   |为美好的世界献上爆焰！|この素晴らしい世界に爆焔を！|Watched|83|
   |在无神世界里进行传教活动|神無き世界のカミサマ活動|Watched|69|
   |百合是我的工作！|私の百合はお仕事です！|Watched|79|
   |总之就是很可爱（第2期）|トニカクカワイイ|Watched|75|
-  |魔法少女毁灭者|魔法少女マジカルデストロイヤーズ|Watched|78|
+  |魔法少女毁灭者|魔法少女マジカルデストロイヤーズ|Watched|83|
   |邻人似银河|おとなりに銀河|Watched|72|
   |不知内情的转学生不管三七二十一缠了上来。|事情を知らない転校生がグイグイくる。|GaveUp|-|
-  |鬼灭之刃 刀匠村篇（第3期）|「鬼滅の刃」刀鍛冶の里編|Watched|87|
+  |鬼灭之刃 刀匠村篇（第3期）|「鬼滅の刃」刀鍛冶の里編|Watched|84|
   |【我推的孩子】|【推しの子】|Watched|95|
 </details>
 
 <details>
-  <summary>Report of 2023, Winter | count: 12</summary>
+  <summary>Report of 2023, Winter | count: 13</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -115,6 +133,7 @@
   |不要欺負我，長瀞同學 2nd Attack（第2期）|イジらないで、長瀞さん 2nd Attack|Watched|78|
   |虛構推理 Season2（第2期）|虚構推理 Season2|Watched|90|
   |久保同學不放過我|久保さんは僕を許さない|Watched|85|
+  |怕痛的我，把防禦力點滿就對了2（第2期）|痛いのは嫌なので防御力に極振りしたいと思います。2|Watched|70|
   |輝夜姬想讓人告白-永不結束的初吻-（特別篇）|かぐや様は告らせたい-ファーストキッスは終わらない-|Watched|85|
 </details>
 

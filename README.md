@@ -1,5 +1,8 @@
 # AnimeReport
-### 自2000年到2023年, 共观看动画510部 (OVA与OAD除外), 弃番13部, 弃番率2.49%
+### 总览 (OVA与OAD除外)
+|统计年份|观看总数|弃番数|弃番率|评分数|评分率|平均分|
+|----|----|----|----|----|----|----|
+|2000~2023年|521部|13部|2.43%|87部|16.70%|82.99分|
 
 - Excluded the two tags "Male protagonist" and "Female protagonist"
 <table>
@@ -16,18 +19,18 @@
 <details>
   <summary>Top 10 tags&compines</summary>
 
-  |index |tag|count|company|count|
+  |index|tag|count|company|count|
   |----|----|----|----|----|
-  |1|Primarily Female Cast|264|J.C.STAFF|33|
-  |2|School|241|A-1 Pictures|25|
-  |3|Cute Girls Doing Cute Things|177|动画工房|24|
-  |4|Heterosexual|169|SILVER LINK.|21|
-  |5|Primarily Teen Cast|149|京都动画|16|
-  |6|Kuudere|139|CloverWorks|15|
-  |7|Tsundere|128|Studio五组|12|
-  |8|Ensemble Cast|124|SHAFT|12|
-  |9|Seinen|113|8bit|11|
-  |10|Magic|113|project No.9|11|
+  |1|Primarily Female Cast|268|J.C.STAFF|33|
+  |2|School|243|A-1 Pictures|25|
+  |3|Cute Girls Doing Cute Things|180|动画工房|24|
+  |4|Heterosexual|176|SILVER LINK.|21|
+  |5|Primarily Teen Cast|151|京都动画|16|
+  |6|Kuudere|142|CloverWorks|15|
+  |7|Tsundere|130|Studio五组|12|
+  |8|Ensemble Cast|127|SHAFT|12|
+  |9|Magic|118|8bit|11|
+  |10|Seinen|115|project No.9|11|
 </details>
 
 
@@ -37,8 +40,8 @@
 54┃                                                                                           ■■■■     
 48┃                                                             ■■■■                     ■■■■ ■■■■     
 42┃                                                             ■■■■ ■■■■ ■■■■           ■■■■ ■■■■     
-36┃                                                             ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■     
-30┃                                                        ■■■■ ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■     
+36┃                                                             ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■ ■■■■
+30┃                                                        ■■■■ ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■ ■■■■
 24┃                                              ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
 18┃                                    ■■■■      ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
 12┃                               ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
@@ -80,22 +83,39 @@
   |天使降临到我身边！|私に天使が舞い降りた!|88|
   |NEW GAME!!（第2期）|NEW GAME!!|88|
   |悠哉日常大王 Repeat（第2期）|のんのんびより りぴーと|88|
+  |無職轉生II～到了異世界就拿出真本事～（第2期上半）|無職転生II～異世界行ったら本気だす～|87|
   |BanG Dream! 3rd Season（第3期）|BanG Dream! 3rd Season|87|
   |漫画女孩|こみっくがーるず|87|
   |樱Trick|桜Trick|87|
   |悠哉日常大王|のんのんびより|87|
+  |Lv1魔王與獨居廢勇者|Lv1魔王とワンルーム勇者|86|
+  |幻日夜羽 -鏡中暉光-|幻日のヨハネ -SUNSHINE in the MIRROR-|86|
   |明日同学的水手服|明日ちゃんのセーラー服|86|
   |輝夜姬想讓人告白-永不結束的初吻-（特別篇）|かぐや様は告らせたい-ファーストキッスは終わらない-|85|
   |久保同學不放過我|久保さんは僕を許さない|85|
   |在地下城尋求邂逅是否搞錯了什麼IV 深章 災厄篇（第4期第2部分）|ダンジョンに出会いを求めるのは間違っているだろうかIV 深章 厄災篇|85|
   |链锯人|チェンソーマン|85|
-  |鬼灭之刃 无限列车篇（电视动画版）|『鬼滅の刃』無限列車編|85|
-  |前辈有够烦|先輩がうざい後輩の話|85|
-  |无职转生～到了异世界就拿出真本事～（下半）|無職転生～異世界行ったら本気だす～|85|
 </details>
 
 <details>
-  <summary>Report of 2023, Spring | count: 16</summary>
+  <summary>Report of 2023, Summer | count: 10</summary>
+
+  |中文名|Name|Status|Score|
+  |----|----|----|----|
+  |萊莎的鍊金工房 ～常闇女王與秘密藏身處～|ライザのアトリエ ～常闇の女王と秘密の隠れ家～|Watched|73|
+  |公司的小小前輩|うちの会社の小さい先輩の話|Watched|76|
+  |幻日夜羽 -鏡中暉光-|幻日のヨハネ -SUNSHINE in the MIRROR-|Watched|86|
+  |無職轉生II～到了異世界就拿出真本事～（第2期上半）|無職転生II～異世界行ったら本気だす～|Watched|87|
+  |Lv1魔王與獨居廢勇者|Lv1魔王とワンルーム勇者|Watched|86|
+  |我喜歡的女孩忘記戴眼鏡|好きな子がめがねを忘れた|Watched|64|
+  |死神少爺與黑女僕（第2期）|死神坊ちゃんと黒メイド|Watched|67|
+  |白聖女與黑牧師|白聖女と黒牧師|Watched|83|
+  |間諜教室（第2期）|スパイ教室|Watched|71|
+  |打工吧！！魔王大人（第2期第2部分）|はたらく魔王さま！！|Watched|78|
+</details>
+
+<details>
+  <summary>Report of 2023, Spring | count: 17</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -115,6 +135,7 @@
   |不知内情的转学生不管三七二十一缠了上来。|事情を知らない転校生がグイグイくる。|GaveUp|-|
   |鬼灭之刃 刀匠村篇（第3期）|「鬼滅の刃」刀鍛冶の里編|Watched|84|
   |【我推的孩子】|【推しの子】|Watched|95|
+  |BanG Dream! It's MyGO!!!!!|BanG Dream! It's MyGO!!!!!|Watched|84|
 </details>
 
 <details>
@@ -1109,6 +1130,5 @@
   |Fate/kaleid liner 魔法少女☆伊莉雅 雪下的誓言|劇場版 Fate/kaleid liner プリズマ☆イリヤ 雪下の誓い|
   |贤惠幼妻仙狐小姐|世話やきキツネの仙狐さん|
   |Fate/kaleid liner 魔法少女☆伊莉雅 Prisma☆Phantasm|Fate/kaleid liner Prisma☆Illya プリズマ☆ファンタズム|
-  |BanG Dream! It's MyGO!!!!!|BanG Dream! It's MyGO!!!!!|
 </details>
 

@@ -434,6 +434,10 @@ namespace AnalyzeCode
                         string[] productionCompanyList = anime.productionCompany.Split('×', '、', '→', '/');
                         foreach (string productionCompany in productionCompanyList)
                         {
+                            if (productionCompany.Trim() == "")
+                            {
+                                continue;
+                            }
                             bool hasContain = false;
                             foreach (string key in watchedConpanyStr.Keys)
                             {
@@ -460,21 +464,39 @@ namespace AnalyzeCode
             
             watchedTagStr = watchedTagStr.OrderBy(x => x.Value).Reverse().ToDictionary(x => x.Key, x => x.Value);
             watchedConpanyStr = watchedConpanyStr.OrderBy(x => x.Value).Reverse().ToDictionary(x => x.Key, x => x.Value);
-            tagOptionDic[watchedTagStr.Keys.ElementAt(0)] = new TagOption(){ Rotate = 0 };
-            tagOptionDic[watchedTagStr.Keys.ElementAt(1)] = new TagOption(){ Rotate = 0 };
-            tagOptionDic[watchedTagStr.Keys.ElementAt(2)] = new TagOption(){ Rotate = 0 };
-            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(0)] = new TagOption(){ Rotate = 0 };
-            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(1)] = new TagOption(){ Rotate = 0 };
-            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(2)] = new TagOption(){ Rotate = 0 };
+            tagOptionDic[watchedTagStr.Keys.ElementAt(0)] = new TagOption(){ Rotate = new Rotate(0) };
+            tagOptionDic[watchedTagStr.Keys.ElementAt(1)] = new TagOption(){ Rotate = new Rotate(0) };
+            tagOptionDic[watchedTagStr.Keys.ElementAt(2)] = new TagOption(){ Rotate = new Rotate(0) };
+            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(0)] = new TagOption(){ Rotate = new Rotate(0) };
+            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(1)] = new TagOption(){ Rotate = new Rotate(0) };
+            companyTagOptionDic[watchedConpanyStr.Keys.ElementAt(2)] = new TagOption(){ Rotate = new Rotate(0) };
+            
+            List<Anime> hasScoreAnime = animeList.Where(x => x.score != -1).ToList();
+            List<Anime> sortedAnime = hasScoreAnime.OrderBy(x => x.score).Reverse().ToList();
             
             List<string> output = new List<string>();
             output.Add("# AnimeReport");
             
             Logger.Info("Output start");
-            output.Add("### " + "自" + yearList[0] + "年到" + yearList.Last() + "年, 共观看动画" + tvWatched + "部 (OVA与OAD除外), 弃番" + tvGaveUp +"部, 弃番率" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%");
+            output.Add("### 总览 (OVA与OAD除外)");
+            output.Add("|统计年份|观看总数|弃番数|弃番率|评分数|评分率|平均分|");
+            output.Add("|----|----|----|----|----|----|----|");
+            int scoredCount = 0;
+            int sumScore = 0;
+            foreach (Anime anime in hasScoreAnime)
+            {
+                if (anime.animeType != AnimeType.TV && anime.animeType != AnimeType.WEB)
+                {
+                    continue;
+                }
+                
+                ++scoredCount;
+                sumScore += anime.score;
+            }
+            output.Add("|" + yearList[0] + "~" + yearList.Last() + "年" + "|" + tvWatched + "部|" + tvGaveUp + "部|" + (((double)tvGaveUp / (tvWatched + tvGaveUp)) * 100).ToString("#0.00") + "%" + "|" + scoredCount + "部|" + (((double)scoredCount / (tvWatched)) * 100).ToString("#0.00") + "%" + "|" + ((double)sumScore / (scoredCount)).ToString("#0.00") + "分|");
             output.Add("");
             
-            
+            output.Add("- Excluded the two tags \"Male protagonist\" and \"Female protagonist\"");
             output.Add("<table>");
             output.Add("  <tr>");
             output.Add("    <td><a href=\"https://github.com/ZjzMisaka/AnimeReport\"><img width=1000 align=\"center\" src=\"https://github.com/ZjzMisaka/AnimeReport/blob/main/tags.bmp\" title=\"AnimeReport\"/></a></td>");
@@ -486,7 +508,19 @@ namespace AnalyzeCode
             output.Add("  </tr>");
             output.Add("</table>");
             output.Add("");
-            output.Add("- Excluded the two tags \"Male protagonist\" and \"Female protagonist\"");
+            
+            Logger.Info("Outputing top 10...");
+            output.Add("<details>");
+            output.Add("  <summary>Top 10 tags&compines</summary>");
+            output.Add("");
+            output.Add("  |index|tag|count|company|count|");
+            output.Add("  |----|----|----|----|----|");
+            for(int i = 0; i < 10; ++i)
+            {
+                output.Add("  |" + (i + 1) + "|" + watchedTagStr.Keys.ElementAt(i) + "|" + watchedTagStr.Values.ElementAt(i) + "|" + watchedConpanyStr.Keys.ElementAt(i) + "|" + watchedConpanyStr.Values.ElementAt(i) + "|");
+            }
+            output.Add("</details>");
+            output.Add("");
             
             Logger.Info("Outputing chart...");
             output.Add("");
@@ -552,7 +586,6 @@ namespace AnalyzeCode
             output.Add("");
             
             Logger.Info("Outputing high score list");
-            List<Anime> sortedAnime = animeList.OrderBy(x => x.score).Reverse().ToList();
             output.Add("<details>");
             output.Add("  <summary>High score list (tv, web)</summary>");
             output.Add("");
@@ -626,10 +659,9 @@ namespace AnalyzeCode
                 TagCloudOption tagCloudOption = new TagCloudOption();
                 tagCloudOption.FontFamily = fontFamily;
                 tagCloudOption.RotateList = new List<int> { 0, 90 };
-                tagCloudOption.BackgroundColor = Color.White;
+                tagCloudOption.BackgroundColor = new TagCloudOption.ColorOption(Color.White);
                 tagCloudOption.FontColorList = new List<Color>() { Color.FromArgb(22, 113, 220) };
                 tagCloudOption.FontSizeRange = (6, 100);
-                tagCloudOption.TagSpacing = 2;
                 tagCloudOption.AngleStep = 1;
                 tagCloudOption.RadiusStep = 1;
                 tagCloudOption.InitSize = new ImgSize(800, 500);
@@ -638,7 +670,7 @@ namespace AnalyzeCode
                 tagCloudOption.InitSize = new ImgSize(80, 50);
                 tagCloudOption.VerticalOuterMargin = 3;
                 tagCloudOption.OutputSize = new ImgSize(2400, 1500);
-                tagCloudOption.TagSpacing = 4;
+                tagCloudOption.TagSpacing = 5;
                 
                 Logger.Info("Making tags.bmp...");
                 Bitmap bmpTag = new TagCloud(watchedTagStr, tagCloudOption, tagOptionDic).Get();

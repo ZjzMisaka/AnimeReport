@@ -2,7 +2,7 @@
 ### 总览 (OVA与OAD除外)
 |统计年份|观看总数|弃番数|弃番率|评分数|评分率|平均分|
 |----|----|----|----|----|----|----|
-|2000~2023年|521部|13部|2.43%|87部|16.70%|82.99分|
+|2000~2023年|535部|14部|2.55%|102部|19.07%|82.45分|
 
 - Excluded the two tags "Male protagonist" and "Female protagonist"
 <table>
@@ -21,16 +21,16 @@
 
   |index|tag|count|company|count|
   |----|----|----|----|----|
-  |1|Primarily Female Cast|268|J.C.STAFF|33|
-  |2|School|243|A-1 Pictures|25|
-  |3|Cute Girls Doing Cute Things|180|动画工房|24|
-  |4|Heterosexual|176|SILVER LINK.|21|
-  |5|Primarily Teen Cast|151|京都动画|16|
+  |1|Primarily Female Cast|274|J.C.STAFF|33|
+  |2|School|248|A-1 Pictures|25|
+  |3|Cute Girls Doing Cute Things|182|动画工房|24|
+  |4|Heterosexual|180|SILVER LINK.|21|
+  |5|Primarily Teen Cast|156|京都动画|16|
   |6|Kuudere|142|CloverWorks|15|
-  |7|Tsundere|130|Studio五组|12|
-  |8|Ensemble Cast|127|SHAFT|12|
-  |9|Magic|118|8bit|11|
-  |10|Seinen|115|project No.9|11|
+  |7|Tsundere|134|Studio五组|12|
+  |8|Ensemble Cast|130|SHAFT|12|
+  |9|Magic|122|8bit|11|
+  |10|Seinen|117|project No.9|11|
 </details>
 
 
@@ -38,8 +38,8 @@
 ````
 60┃                                                                                                    
 54┃                                                                                           ■■■■     
-48┃                                                             ■■■■                     ■■■■ ■■■■     
-42┃                                                             ■■■■ ■■■■ ■■■■           ■■■■ ■■■■     
+48┃                                                             ■■■■                     ■■■■ ■■■■ ■■■■
+42┃                                                             ■■■■ ■■■■ ■■■■           ■■■■ ■■■■ ■■■■
 36┃                                                             ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■ ■■■■
 30┃                                                        ■■■■ ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■ ■■■■
 24┃                                              ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
@@ -69,9 +69,11 @@
   |动物朋友|けものフレンズ|95|
   |钢之炼金术师 FULLMETAL ALCHEMIST|鋼の錬金術師 FULLMETAL ALCHEMIST|95|
   |幸运☆星|らき☆すた|95|
+  |超超超超超喜歡你的100個女朋友|君のことが大大大大大好きな100人の彼女|92|
   |少女☆歌剧Revue Starlight|少女☆歌劇 レヴュー・スタァライト|92|
   |百合熊风暴|ユリ熊嵐|92|
   |KILL la KILL|キルラキル|92|
+  |16bit的感動 ANOTHER LAYER|16bitセンセーション ANOTHER LAYER|91|
   |虛構推理 Season2（第2期）|虚構推理 Season2|90|
   |擅长捉弄人的高木同学3（第3期）|からかい上手の高木さん3|90|
   |SLOW LOOP-女孩的钓鱼慢活-|スローループ|90|
@@ -79,26 +81,45 @@
   |少女终末旅行|少女終末旅行|90|
   |小林家的龙女仆|小林さんちのメイドラゴン|90|
   |日常|日常|90|
+  |葬送的芙莉蓮|葬送のフリーレン|88|
   |我内心的糟糕念头|僕の心のヤバイやつ|88|
   |天使降临到我身边！|私に天使が舞い降りた!|88|
   |NEW GAME!!（第2期）|NEW GAME!!|88|
   |悠哉日常大王 Repeat（第2期）|のんのんびより りぴーと|88|
+  |賽馬娘 Pretty Derby Season 3（第3期）|ウマ娘 プリティーダービー Season 3|87|
   |無職轉生II～到了異世界就拿出真本事～（第2期上半）|無職転生II～異世界行ったら本気だす～|87|
   |BanG Dream! 3rd Season（第3期）|BanG Dream! 3rd Season|87|
   |漫画女孩|こみっくがーるず|87|
   |樱Trick|桜Trick|87|
   |悠哉日常大王|のんのんびより|87|
+  |SHY靦腆英雄|SHY|86|
   |Lv1魔王與獨居廢勇者|Lv1魔王とワンルーム勇者|86|
   |幻日夜羽 -鏡中暉光-|幻日のヨハネ -SUNSHINE in the MIRROR-|86|
-  |明日同学的水手服|明日ちゃんのセーラー服|86|
-  |輝夜姬想讓人告白-永不結束的初吻-（特別篇）|かぐや様は告らせたい-ファーストキッスは終わらない-|85|
-  |久保同學不放過我|久保さんは僕を許さない|85|
-  |在地下城尋求邂逅是否搞錯了什麼IV 深章 災厄篇（第4期第2部分）|ダンジョンに出会いを求めるのは間違っているだろうかIV 深章 厄災篇|85|
-  |链锯人|チェンソーマン|85|
 </details>
 
 <details>
-  <summary>Report of 2023, Summer | count: 10</summary>
+  <summary>Report of 2023, Autumn | count: 14</summary>
+
+  |中文名|Name|Status|Score|
+  |----|----|----|----|
+  |SHY靦腆英雄|SHY|Watched|86|
+  |我的推是壞人大小姐。|私の推しは悪役令嬢。|Watched|77|
+  |撿走被人悔婚的千金，教會她壞壞的幸福生活|婚約破棄された令嬢を拾った俺が、イケナイことを教え込む|Watched|71|
+  |賽馬娘 Pretty Derby Season 3（第3期）|ウマ娘 プリティーダービー Season 3|Watched|87|
+  |16bit的感動 ANOTHER LAYER|16bitセンセーション ANOTHER LAYER|Watched|91|
+  |盾之勇者成名錄 Season3（第3期）|盾の勇者の成り上がり Season3|Watched|72|
+  |家裡蹲吸血姬的鬱悶|ひきこまり吸血姫の悶々|Watched|77|
+  |SPY×FAMILY間諜家家酒（第2期）|SPY×FAMILY|Watched|84|
+  |堤亞穆帝國物語～從斷頭台開始，公主重生後的逆轉人生～|ティアムーン帝国物語～断頭台から始まる、姫の転生逆転ストーリー～|Watched|85|
+  |我們的雨色協議|僕らの雨いろプロトコル|Watched|60|
+  |偶像大師 百萬人演唱會！|アイドルマスター ミリオンライブ！|GaveUp|-|
+  |超超超超超喜歡你的100個女朋友|君のことが大大大大大好きな100人の彼女|Watched|92|
+  |星靈感應|星屑テレパス|Watched|84|
+  |放學後少年花子君|放課後少年花子くん|Watched|68|
+</details>
+
+<details>
+  <summary>Report of 2023, Summer | count: 11</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -112,6 +133,7 @@
   |白聖女與黑牧師|白聖女と黒牧師|Watched|83|
   |間諜教室（第2期）|スパイ教室|Watched|71|
   |打工吧！！魔王大人（第2期第2部分）|はたらく魔王さま！！|Watched|78|
+  |烈焰先鋒 救國的橘衣消防員|め組の大吾 救国のオレンジ|Watched|68|
 </details>
 
 <details>

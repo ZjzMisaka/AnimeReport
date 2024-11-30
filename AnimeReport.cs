@@ -300,7 +300,7 @@ namespace AnalyzeCode
                     if (param.Get("Option").Contains("GetTag") && (anime.tagListFromLocal == null || anime.tagListFromLocal.Count == 0))
                     {
                         Logger.Info("Waiting...");
-                        Thread.Sleep(3000);
+                        Thread.Sleep(5000);
                         Logger.Info("Getting tags...");
                         var results = aniClient.SearchMediaAsync(new SearchMediaFilter
                         {

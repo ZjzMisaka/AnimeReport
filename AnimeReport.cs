@@ -608,8 +608,8 @@ namespace AnalyzeCode
             output.Add("<details>");
             output.Add("  <summary>High score list (tv, web)</summary>");
             output.Add("");
-            output.Add("  |中文名|Name|Score|");
-            output.Add("  |----|----|----|");
+            output.Add("  |中文名|Name|Score|年份|");
+            output.Add("  |----|----|----|----|");
             int outputedHighScore = 0;
             foreach (Anime anime in sortedAnime)
             {
@@ -622,7 +622,7 @@ namespace AnalyzeCode
                     continue;
                 }
                 Logger.Info("Outputing high score list: " + anime.name);
-                output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|");
+                output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|" + anime.year + "|");
                 ++outputedHighScore;
             }
             output.Add("</details>");
@@ -661,7 +661,7 @@ namespace AnalyzeCode
             output.Add("  |----|----|");
             foreach(Anime anime in animeList)
             {
-                if (anime.planToWatch)
+                if (anime.planToWatch && (!string.IsNullOrWhiteSpace(anime.name) || !string.IsNullOrWhiteSpace(anime.origName)))
                 {
                     Logger.Info("Outputing plan to watch: " + anime.name);
                     output.Add("  |" + anime.name + "|" + anime.origName + "|");

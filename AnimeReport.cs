@@ -633,11 +633,11 @@ namespace AnalyzeCode
                 }
                 else if (anime.season == Season.Autumn)
                 {
-                    season = "夏";
+                    season = "秋";
                 }
                 else if (anime.season == Season.Winter)
                 {
-                    season = "夏";
+                    season = "冬";
                 }
                 output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|" + anime.year + season + "|");
                 ++outputedHighScore;

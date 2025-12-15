@@ -2,7 +2,7 @@
 ### 总览 (OVA与OAD除外)
 |统计年份|观看总数|弃番数|弃番率|评分数|评分率|平均分|
 |----|----|----|----|----|----|----|
-|2000~2024年|574部|14部|2.38%|141部|24.56%|80.88分|
+|2000~2025年|620部|15部|2.36%|189部|30.48%|80.51分|
 
 - Excluded the two tags "Male protagonist" and "Female protagonist"
 <table>
@@ -21,33 +21,33 @@
 
   |index|tag|count|company|count|
   |----|----|----|----|----|
-  |1|Primarily Female Cast|288|J.C.STAFF|35|
-  |2|School|265|动画工房|27|
-  |3|Heterosexual|197|A-1 Pictures|27|
-  |4|Cute Girls Doing Cute Things|193|SILVER LINK.|21|
-  |5|Primarily Teen Cast|170|京都动画|17|
-  |6|Kuudere|148|CloverWorks|15|
-  |7|Tsundere|141|8bit|13|
-  |8|Ensemble Cast|136|project No.9|13|
-  |9|Magic|130|Studio五组|12|
-  |10|Seinen|121|SHAFT|12|
+  |1|Primarily Female Cast|306|J.C.STAFF|36|
+  |2|School|279|动画工房|28|
+  |3|Heterosexual|214|A-1 Pictures|27|
+  |4|Cute Girls Doing Cute Things|210|SILVER LINK.|25|
+  |5|Primarily Teen Cast|182|CloverWorks|19|
+  |6|Kuudere|157|京都动画|17|
+  |7|Tsundere|150|8bit|13|
+  |8|Ensemble Cast|144|project No.9|13|
+  |9|Magic|142|Studio五组|12|
+  |10|Seinen|135|SHAFT|12|
 </details>
 
 
-### Annual animation watching statistics map (last 20 years)
+### Annual animation watching statistics map
 ````
 60┃                                                                                                    
-54┃                                                                                      ■■■■          
-48┃                                                        ■■■■                     ■■■■ ■■■■ ■■■■     
-42┃                                                        ■■■■ ■■■■ ■■■■           ■■■■ ■■■■ ■■■■     
-36┃                                                        ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
-30┃                                                   ■■■■ ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
-24┃                                         ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
-18┃                               ■■■■      ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
-12┃                          ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
- 6┃      ₋₋₋₋ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
+54┃                                                                                 ■■■■               
+48┃                                                   ■■■■                     ■■■■ ■■■■ ■■■■          
+42┃                                                   ■■■■ ■■■■ ■■■■           ■■■■ ■■■■ ■■■■          
+36┃                                                   ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
+30┃                                    ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■      ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
+24┃                                    ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
+18┃                          ■■■■      ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
+12┃                     ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
+ 6┃ ₋₋₋₋ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■ ■■■■
   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024
+    2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025
 ````
 
 <details>
@@ -69,11 +69,14 @@
   |动物朋友|けものフレンズ|95|
   |钢之炼金术师 FULLMETAL ALCHEMIST|鋼の錬金術師 FULLMETAL ALCHEMIST|95|
   |幸运☆星|らき☆すた|95|
+  |我們不可能成為戀人！絕對不行。（※似乎可行？）|わたしが恋人になれるわけないじゃん、ムリムリ！（※ムリじゃなかった!?）|93|
   |我内心的糟糕念头（第2期）|僕の心のヤバイやつ|93|
+  |超超超超超喜歡你的100個女朋友（第2期）|君のことが大大大大大好きな100人の彼女|92|
   |超超超超超喜歡你的100個女朋友|君のことが大大大大大好きな100人の彼女|92|
   |少女☆歌剧Revue Starlight|少女☆歌劇 レヴュー・スタァライト|92|
   |百合熊风暴|ユリ熊嵐|92|
   |KILL la KILL|キルラキル|92|
+  |戀上換裝娃娃（第2期）|その着せ替え人形は恋をする|91|
   |败北女角太多了！|負けヒロインが多すぎる！|91|
   |16bit的感動 ANOTHER LAYER|16bitセンセーション ANOTHER LAYER|91|
   |虛構推理 Season2（第2期）|虚構推理 Season2|90|
@@ -88,13 +91,90 @@
   |天使降临到我身边！|私に天使が舞い降りた!|88|
   |NEW GAME!!（第2期）|NEW GAME!!|88|
   |悠哉日常大王 Repeat（第2期）|のんのんびより りぴーと|88|
+  |SPY×FAMILY間諜家家酒（第3期）|SPY×FAMILY|87|
+  |徹夜之歌（第2期）|よふかしのうた Season2|87|
+  |歲月流逝飯菜依舊美味|日々は過ぎれど飯うまし|87|
   |无职转生II～到了异世界就拿出真本事～（第2期下半）|無職転生II～異世界行ったら本気だす～|87|
   |賽馬娘 Pretty Derby Season 3（第3期）|ウマ娘 プリティーダービー Season 3|87|
   |無職轉生II～到了異世界就拿出真本事～（第2期上半）|無職転生II～異世界行ったら本気だす～|87|
   |BanG Dream! 3rd Season（第3期）|BanG Dream! 3rd Season|87|
+  |贤惠幼妻仙狐小姐|世話やきキツネの仙狐さん|87|
   |漫画女孩|こみっくがーるず|87|
   |樱Trick|桜Trick|87|
   |悠哉日常大王|のんのんびより|87|
+  |CITY THE ANIMATION|CITY THE ANIMATION|86|
+  |搖滾樂是淑女的嗜好|ロックは淑女の嗜みでして|86|
+  |少女乐团 呐喊吧|ガールズバンドクライ|86|
+</details>
+
+<details>
+  <summary>Report of 2025, Autumn | count: 12</summary>
+
+  |中文名|Name|Status|Score|
+  |----|----|----|----|
+  |不中用的前輩。|不器用な先輩。|Watched|83|
+  |對我垂涎欲滴的非人少女|私を喰べたい、ひとでなし|Watched|78|
+  |惡食千金與狂血公爵|悪食令嬢と狂血公爵|Watched|79|
+  |不動聲色的柏田與喜形於色的太田|顔に出ない柏田さんと顔に出る太田君|Watched|71|
+  |SPY×FAMILY間諜家家酒（第3期）|SPY×FAMILY|Watched|87|
+  |末世二輪之旅|終末ツーリング|Watched|76|
+  |朋友的妹妹只纏著我|友達の妹が俺にだけウザい|Watched|70|
+  |賽馬娘 灰髮灰姑娘（下半）|ウマ娘 シンデレラグレイ|Watched|82|
+  |阿爾瑪醬想成為家人|アルマちゃんは家族になりたい|Watched|83|
+  |轉生後的我成了英雄爸爸和精靈媽媽的女兒|父は英雄、母は精霊、娘の私は転生者。|Watched|68|
+  |這裡是充滿笑容的職場。|笑顔のたえない職場です。|Watched|84|
+  |不擅吸血的吸血鬼|ちゃんと吸えない吸血鬼ちゃん|Watched|84|
+</details>
+
+<details>
+  <summary>Report of 2025, Summer | count: 15</summary>
+
+  |中文名|Name|Status|Score|
+  |----|----|----|----|
+  |徹夜之歌（第2期）|よふかしのうた Season2|Watched|87|
+  |青春豬頭少年不會夢到聖誕服女郎|青春ブタ野郎はサンタクロースの夢を見ない|Watched|71|
+  |戀上換裝娃娃（第2期）|その着せ替え人形は恋をする|Watched|91|
+  |Bad Girl 不良少女|ばっどがーる|Watched|84|
+  |公爵千金的家庭教師|公女殿下の家庭教師|Watched|72|
+  |噗妮露是可愛史萊姆（第2期）|ぷにるはかわいいスライム|Watched|84|
+  |異世界默示錄麥諾格拉～從毀滅文明開始征服世界～|異世界黙示録マイノグーラ～破滅の文明で始める世界征服～|Watched|85|
+  |醜男真戰士|ブサメンガチファイター|Watched|79|
+  |遊樂場少女的異文化交流|ゲーセン少女と異文化交流|Watched|78|
+  |CITY THE ANIMATION|CITY THE ANIMATION|Watched|86|
+  |明天，美食廣場見。|フードコートで、また明日。|Watched|82|
+  |我們不可能成為戀人！絕對不行。（※似乎可行？）|わたしが恋人になれるわけないじゃん、ムリムリ！（※ムリじゃなかった!?）|Watched|93|
+  |盾之勇者成名錄 Season4（第4期）|盾の勇者の成り上がり Season4|Watched|67|
+  |新吊帶襪天使|New PANTY＆STOCKING with GARTERBELT|Watched|75|
+  |NUKITASHI 住在拔作島上的我該如何是好？|ぬきたし THE ANIMATION|Watched|80|
+</details>
+
+<details>
+  <summary>Report of 2025, Spring | count: 7</summary>
+
+  |中文名|Name|Status|Score|
+  |----|----|----|----|
+  |搖滾樂是淑女的嗜好|ロックは淑女の嗜みでして|Watched|86|
+  |男女之間存在純友情嗎？（不，不存在！）|男女の友情は成立する？（いや、しないっ!!）|GaveUp|53|
+  |持續狩獵史萊姆三百年，不知不覺就練到LV MAX ～其二～（第2期）|スライム倒して300年、知らないうちにレベルMAXになってました ～そのに～|Watched|70|
+  |賽馬娘 灰髮灰姑娘（上半）|ウマ娘 シンデレラグレイ|Watched|85|
+  |不會拿捏距離的阿波連同學（第2期）|阿波連さんははかれない season2|Watched|81|
+  |mono女孩|mono|Watched|85|
+  |歲月流逝飯菜依舊美味|日々は過ぎれど飯うまし|Watched|87|
+</details>
+
+<details>
+  <summary>Report of 2025, Winter | count: 8</summary>
+
+  |中文名|Name|Status|Score|
+  |----|----|----|----|
+  |BanG Dream! Ave Mujica|BanG Dream! Ave Mujica|Watched|82|
+  |我與尼特女忍者的莫名同居生活|ニートくノ一となぜか同棲はじめました|Watched|78|
+  |這公司有我喜歡的人|この会社に好きな人がいます|Watched|75|
+  |中年大叔轉生反派千金|悪役令嬢転生おじさん|Watched|72|
+  |歡迎來到日本，妖精小姐。|日本へようこそエルフさん。|Watched|70|
+  |雖然是公會的櫃檯小姐，但因為不想加班所以打算獨自討伐迷宮頭目|ギルドの受付嬢ですが、残業は嫌なのでボスをソロ討伐しようと思います|Watched|73|
+  |超超超超超喜歡你的100個女朋友（第2期）|君のことが大大大大大好きな100人の彼女|Watched|92|
+  |Re:從零開始的異世界生活 3rd season 反擊篇（第3期下半）|Re:ゼロから始める異世界生活 3rd season 反擊編|Watched|70|
 </details>
 
 <details>
@@ -511,7 +591,7 @@
 </details>
 
 <details>
-  <summary>Report of 2019, Spring | count: 5</summary>
+  <summary>Report of 2019, Spring | count: 6</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -520,6 +600,7 @@
   |一个人的○○小日子|ひとりぼっちの○○生活|Watched|-|
   |鬼灭之刃 灶门炭治郎立志篇|鬼滅の刃 竈門炭治郎立志編|Watched|-|
   |强袭魔女 501部队出动！|ワールドウィッチーズシリーズ 501部隊発進しますっ!|Watched|-|
+  |贤惠幼妻仙狐小姐|世話やきキツネの仙狐さん|Watched|87|
 </details>
 
 <details>
@@ -715,7 +796,7 @@
 </details>
 
 <details>
-  <summary>Report of 2016, Summer | count: 13</summary>
+  <summary>Report of 2016, Summer | count: 14</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -728,6 +809,7 @@
   |TABOO TATTOO－禁忌咒纹－|タブー・タトゥー|Watched|-|
   |腐男子高校生活|腐男子高校生活|Watched|-|
   |魔装学园H×H|魔装学園H×H|Watched|-|
+  |Fate/kaleid liner 魔法少女☆伊莉雅 3rei!!|Fate/kaleid liner プリズマ☆イリヤ ドライ!!|Watched|82|
   |planetarian 星之梦|planetarian 〜ちいさなほしのゆめ〜|Watched|-|
   |这个美术社大有问题！|この美術部には問題がある!|Watched|-|
   |时间旅行少女～真理、和花与8名科学家～|タイムトラベル少女～マリ・ワカと8人の科学者たち～|Watched|-|
@@ -785,7 +867,7 @@
 </details>
 
 <details>
-  <summary>Report of 2015, Summer | count: 11</summary>
+  <summary>Report of 2015, Summer | count: 12</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -799,6 +881,7 @@
   |那就是声优！|それが声優!|Watched|-|
   |我家有个鱼干妹|干物妹! うまるちゃん|Watched|-|
   |学园孤岛|がっこうぐらし!|Watched|-|
+  |Fate/kaleid liner 魔法少女☆伊莉雅 2wei Herz!|Fate/kaleid liner プリズマ☆イリヤ ツヴァイ ヘルツ!|Watched|82|
   |轻松百合 夏日时光！+|ゆるゆり なちゅやちゅみ!+|Watched|-|
 </details>
 
@@ -845,7 +928,7 @@
 </details>
 
 <details>
-  <summary>Report of 2014, Summer | count: 5</summary>
+  <summary>Report of 2014, Summer | count: 6</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -854,6 +937,7 @@
   |斩！赤红之瞳|アカメが斬る!|Watched|-|
   |月刊少女野崎同学|月刊少女野崎くん|Watched|-|
   |前进吧！登山少女 第二季|ヤマノススメ セカンドシーズン|Watched|-|
+  |Fate/kaleid liner 魔法少女☆伊莉雅 2wei|Fate/kaleid liner プリズマ☆イリヤ ツヴァイ！|Watched|82|
 </details>
 
 <details>
@@ -899,7 +983,7 @@
 </details>
 
 <details>
-  <summary>Report of 2013, Summer | count: 6</summary>
+  <summary>Report of 2013, Summer | count: 7</summary>
 
   |中文名|Name|Status|Score|
   |----|----|----|----|
@@ -909,6 +993,7 @@
   |Servant×Service|サーバント×サービス|Watched|-|
   |萝球社！SS|ロウきゅーぶ! SS|Watched|-|
   |黄金拼图|きんいろモザイク|Watched|-|
+  |Fate/kaleid liner 魔法少女☆伊莉雅[夏 3]|Fate/kaleid liner プリズマ☆イリヤ|Watched|82|
 </details>
 
 <details>
@@ -1211,13 +1296,9 @@
   |魔法少女奈叶StrikerS|魔法少女リリカルなのはStrikerS|
   |命运石之门|シュタインズ・ゲート|
   |来自新世界|新世界より|
-  |Fate/kaleid liner 魔法少女☆伊莉雅[夏 3]|Fate/kaleid liner プリズマ☆イリヤ|
-  |Fate/kaleid liner 魔法少女☆伊莉雅 2wei|Fate/kaleid liner プリズマ☆イリヤ ツヴァイ！|
-  |Fate/kaleid liner 魔法少女☆伊莉雅 2wei Herz!|Fate/kaleid liner プリズマ☆イリヤ ツヴァイ ヘルツ!|
-  |Fate/kaleid liner 魔法少女☆伊莉雅 2wei!（OVA）|Fate/kaleid liner プリズマ☆イリヤ ツヴァイ!|
-  |Fate/kaleid liner 魔法少女☆伊莉雅 3rei!!|Fate/kaleid liner プリズマ☆イリヤ ドライ!!|
-  |Fate/kaleid liner 魔法少女☆伊莉雅 雪下的誓言|劇場版 Fate/kaleid liner プリズマ☆イリヤ 雪下の誓い|
-  |贤惠幼妻仙狐小姐|世話やきキツネの仙狐さん|
-  |Fate/kaleid liner 魔法少女☆伊莉雅 Prisma☆Phantasm|Fate/kaleid liner Prisma☆Illya プリズマ☆ファンタズム|
+  |最近的偵探真沒用|まったく最近の探偵ときたら|
+  |||
+  |||
+  |||
 </details>
 

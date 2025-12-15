@@ -608,7 +608,7 @@ namespace AnalyzeCode
             output.Add("<details>");
             output.Add("  <summary>High score list (tv, web)</summary>");
             output.Add("");
-            output.Add("  |中文名|Name|Score|年份|");
+            output.Add("  |中文名|Name|Score|季度|");
             output.Add("  |----|----|----|----|");
             int outputedHighScore = 0;
             foreach (Anime anime in sortedAnime)
@@ -622,7 +622,24 @@ namespace AnalyzeCode
                     continue;
                 }
                 Logger.Info("Outputing high score list: " + anime.name);
-                output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|" + anime.year + "|");
+                string season = "";
+                if (anime.season == Season.Spring)
+                {
+                    season = "春";
+                }
+                else if (anime.season == Season.Summer)
+                {
+                    season = "夏";
+                }
+                else if (anime.season == Season.Autumn)
+                {
+                    season = "夏";
+                }
+                else if (anime.season == Season.Winter)
+                {
+                    season = "夏";
+                }
+                output.Add("  |" + anime.name + "|" + anime.origName + "|" + anime.score + "|" + anime.year + season + "|");
                 ++outputedHighScore;
             }
             output.Add("</details>");

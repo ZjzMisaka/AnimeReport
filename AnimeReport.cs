@@ -373,6 +373,7 @@ namespace AnalyzeCode
             
             Dictionary<string, int> countDic = new Dictionary<string, int>();
             int maxCount = 0;
+            string firstHasRecordYear = "";
             foreach(string year in yearList)
             {
                 List<Anime> thisYearAnimeList = (List<Anime>)GlobalDic.GetObj(year);
@@ -392,6 +393,10 @@ namespace AnalyzeCode
                 if (count > maxCount)
                 {
                     maxCount = count;
+                }
+                if (count > 0 && string.IsNullOrEmpty(firstHasRecordYear))
+                {
+                    firstHasRecordYear = year;
                 }
             }
             
@@ -536,55 +541,69 @@ namespace AnalyzeCode
                 ++maxCount;
             }
             int step = maxCount / 10;
-            output.Add("### Annual animation watching statistics map (last 20 years)");
-            output.Add("````");
-            for (int i = 0; i < 10; ++i)
+            output.Add("### Annual animation watching statistics map");
+            int startYearIndex = yearList.IndexOf(firstHasRecordYear);
+            int lastIndex = yearList.Count - 1;
+            int nowIndex = yearList.Count;
+            while (nowIndex > lastIndex)
             {
-                string now = (maxCount - i * step).ToString() + "┃";
-                if (now.Length == 2)
+                nowIndex = nowIndex - 20;
+            }
+            while (nowIndex < yearList.Count)
+            {
+                List<int> chartYearIndexList = new List<int>();
+                for (int i = 0; i < 20; ++i)
                 {
-                    now = " " + now;
+                    chartYearIndexList.Add(nowIndex);
+                    ++nowIndex;
                 }
-                lines[i] = now;
-            }
-            if (yearList.Count() > 20)
-            {
-                yearList = yearList.GetRange(yearList.Count() - 20, 20);
-            }
-            foreach (string year in yearList)
-            {
-                int count = countDic[year];
+            
+                output.Add("````");
                 for (int i = 0; i < 10; ++i)
                 {
-                    int now = (maxCount - i * step);
-                    if (count >= now)
+                    string now = (maxCount - i * step).ToString() + "┃";
+                    if (now.Length == 2)
                     {
-                        lines[i] = lines[i] + " ■■■■";
+                        now = " " + now;
                     }
-                    else
+                    lines[i] = now;
+                }
+                foreach (int index in chartYearIndexList)
+                {
+                    string year = yearList[index];
+                    int count = countDic[year];
+                    for (int i = 0; i < 10; ++i)
                     {
-                        if (i == 9 && count > 0)
+                        int now = (maxCount - i * step);
+                        if (count >= now)
                         {
-                            lines[i] = lines[i] + " ₋₋₋₋";
+                            lines[i] = lines[i] + " ■■■■";
                         }
                         else
                         {
-                            lines[i] = lines[i] + "     ";
+                            if (i == 9 && count > 0)
+                            {
+                                lines[i] = lines[i] + " ₋₋₋₋";
+                            }
+                            else
+                            {
+                                lines[i] = lines[i] + "     ";
+                            }
                         }
                     }
+                    baseStr += "━━━━━";
+                    yearsStr += " " + year;
                 }
-                baseStr += "━━━━━";
-                yearsStr += " " + year;
+                foreach (string line in lines)
+                {
+                    output.Add(line);
+                }
+                output.Add(baseStr);
+                output.Add(yearsStr);
+                output.Add("````");
+                output.Add("");
             }
-            foreach (string line in lines)
-            {
-                output.Add(line);
-            }
-            output.Add(baseStr);
-            output.Add(yearsStr);
-            output.Add("````");
-            output.Add("");
-            
+
             Logger.Info("Outputing high score list");
             output.Add("<details>");
             output.Add("  <summary>High score list (tv, web)</summary>");
@@ -651,6 +670,7 @@ namespace AnalyzeCode
             output.Add("</details>");
             output.Add("");
             
+            Logger.Info("Outputing Img");
             if (param.Get("Option").Contains("OutputImg"))
             {
                 PrivateFontCollection collection = new PrivateFontCollection();
